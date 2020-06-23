@@ -31,7 +31,7 @@ namespace IFramework.GUITool.LayoutDesign
         float scrollViewHeight=200;
         private void OnEnable()
         {
-            HierarchyView.HandleEve = true;
+            HierarchyView.handleEve = true;
 
         }
         private int index = 0;
@@ -73,7 +73,7 @@ namespace IFramework.GUITool.LayoutDesign
                 HierarchyView.canvas = canvas;
             if (index == 0)
             {
-                HierarchyView.OnCanvasTreeGUI(rect);
+                HierarchyView.OnGUI(rect);
             }
             else
             {

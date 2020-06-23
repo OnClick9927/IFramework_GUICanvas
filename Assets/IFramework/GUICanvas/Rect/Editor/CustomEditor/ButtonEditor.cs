@@ -15,7 +15,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(Button))]
     public class ButtonEditor : TextNodeEditor
     {
-        private Button ele { get { return element as Button; } }
+        private Button ele { get { return node as Button; } }
         private bool insFold = true;
         private GUIStyleEditor btnStyleDrawer;
 

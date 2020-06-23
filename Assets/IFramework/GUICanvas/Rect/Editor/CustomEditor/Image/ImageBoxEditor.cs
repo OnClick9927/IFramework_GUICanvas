@@ -14,7 +14,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ImageBox))]
     public class ImageBoxEditor : ImageNodeEditor
     {
-        private ImageBox image { get { return element as ImageBox; } }
+        private ImageBox image { get { return node as ImageBox; } }
         public override void OnSceneGUI(Action children)
         {
             if (!image.active) return;

@@ -11,7 +11,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(SliderNode))]
     public class SliderNodeEditor : GUINodeEditor
     {
-        private SliderNode slider { get { return element as SliderNode; } }
+        private SliderNode slider { get { return node as SliderNode; } }
         private bool insFold = true;
         private GUIStyleEditor thumbDrawer;
         private GUIStyleEditor sliderDrawer;

@@ -16,7 +16,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ImageToolBar))]
     public class ImageToolBarEditor : ToolBarNodeEditor
     {
-        private ImageToolBar toolbar { get { return element as ImageToolBar; } }
+        private ImageToolBar toolbar { get { return node as ImageToolBar; } }
         private bool insFold = true;
 
         public override void OnSceneGUI(Action children)

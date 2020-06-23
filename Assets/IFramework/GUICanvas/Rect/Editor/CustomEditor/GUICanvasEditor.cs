@@ -15,7 +15,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(GUICanvas))]
     public class GUICanvasEditor : GUINodeEditor
     {
-        private GUICanvas ele { get { return element as GUICanvas; } }
+        private GUICanvas ele { get { return node as GUICanvas; } }
         private bool insFold = true;
         public override void OnSceneGUI(Action children)
         {

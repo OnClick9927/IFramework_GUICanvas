@@ -15,7 +15,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(TextNode))]
     public class TextNodeEditor : GUINodeEditor
     {
-        private TextNode textElement { get { return element as TextNode; } }
+        private TextNode textElement { get { return node as TextNode; } }
         private bool insFold = true;
         private GUIStyleEditor textStyleDrawer;
 
@@ -45,7 +45,7 @@ namespace IFramework.GUITool.RectDesign
         }
         public override void OnSceneGUI(Action children)
         {
-            if (element.active)
+            if (node.active)
             {
                 textElement.textStyle.font = textElement.font;
                 textElement.textStyle.fontStyle = textElement.fontStyle;

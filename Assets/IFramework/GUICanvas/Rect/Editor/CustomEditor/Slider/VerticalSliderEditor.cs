@@ -14,7 +14,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(VerticalSlider))]
     public class VerticalSliderEditor : SliderNodeEditor
     {
-        private VerticalSlider toolbar { get { return element as VerticalSlider; } }
+        private VerticalSlider toolbar { get { return node as VerticalSlider; } }
 
         public override void OnSceneGUI(Action children)
         {

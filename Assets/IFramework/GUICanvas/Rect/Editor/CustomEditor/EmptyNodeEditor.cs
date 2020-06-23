@@ -16,7 +16,7 @@ namespace IFramework.GUITool.RectDesign
 	{
         public override void OnSceneGUI(Action children)
         {
-            if (element.active)
+            if (node.active)
             {
                 BeginGUI();
                 if (children!=null)

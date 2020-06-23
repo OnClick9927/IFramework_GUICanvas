@@ -14,7 +14,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ImageToggle))]
     public class ImageToggleEditor : ImageNodeEditor
     {
-        private ImageToggle toggle { get { return element as ImageToggle; } }
+        private ImageToggle toggle { get { return node as ImageToggle; } }
         private bool insFold = true;
 
 

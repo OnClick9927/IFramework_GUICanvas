@@ -11,7 +11,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ImageNode))]
     public class ImageNodeEditor : GUINodeEditor
     {
-        private ImageNode image { get { return element as ImageNode; } }
+        private ImageNode image { get { return node as ImageNode; } }
         private bool insFold = true;
         private GUIStyleEditor imageStyleDrawer;
 

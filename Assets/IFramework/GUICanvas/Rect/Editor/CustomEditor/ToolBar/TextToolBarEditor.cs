@@ -16,7 +16,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(TextToolBar))]
     public class TextToolBarEditor : ToolBarNodeEditor
     {
-        private TextToolBar toolbar { get { return element as TextToolBar; } }
+        private TextToolBar toolbar { get { return node as TextToolBar; } }
         private bool insFold = true;
 
         public override void OnSceneGUI(Action children)

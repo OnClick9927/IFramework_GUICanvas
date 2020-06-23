@@ -14,17 +14,17 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(Label))]
     public class LabelEditor : TextNodeEditor
     {
-        private Label textElement { get { return element as Label; } }
+        private Label textElement { get { return node as Label; } }
 
         private GUIStyleEditor textStyleDrawer;
         public override void OnSceneGUI(Action children)
         {
             base.OnSceneGUI(children);
 
-            if (!element.active) return;
+            if (!node.active) return;
 
             BeginGUI();
-            GUI.Label(element.position, new GUIContent(textElement.text, textElement.tooltip), textElement.textStyle);
+            GUI.Label(node.position, new GUIContent(textElement.text, textElement.tooltip), textElement.textStyle);
             if (children != null) children();
 
             EndGUI();

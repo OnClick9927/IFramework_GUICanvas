@@ -14,7 +14,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(HorizontalSlider))]
     public class HorizontalSliderEditor : SliderNodeEditor
     {
-        private HorizontalSlider toolbar { get { return element as HorizontalSlider; } }
+        private HorizontalSlider toolbar { get { return node as HorizontalSlider; } }
 
         public override void OnSceneGUI(Action children)
         {

@@ -310,7 +310,7 @@ namespace IFramework.GUITool.RectDesign
         }
 
         private GUINode m_element;
-        public GUINode element
+        public GUINode node
         {
             get { return m_element; }
             set
@@ -329,29 +329,29 @@ namespace IFramework.GUITool.RectDesign
             {
                 calculatorDesign.OnInspectorGUI();
             }
-            insFold = FormatInspectorHeadGUI(insFold, "Element:" + element.GetType().Name, HeadGUI, ContentGUI);
+            insFold = FormatInspectorHeadGUI(insFold, "Element:" + node.GetType().Name, HeadGUI, ContentGUI);
         }
         private void ContentGUI()
         {
 
             this.Pan(() =>
             {
-                element.name = EditorGUILayout.TextField("Name", element.name);
-                using (new EditorGUI.DisabledGroupScope(true)) EditorGUILayout.RectField("Position", element.position);
-                element.enable = EditorGUILayout.Toggle("Enable", element.enable);
+                node.name = EditorGUILayout.TextField("Name", node.name);
+                using (new EditorGUI.DisabledGroupScope(true)) EditorGUILayout.RectField("Position", node.position);
+                node.enable = EditorGUILayout.Toggle("Enable", node.enable);
             })
-                  .FloatField("Rotate Angle", ref element.rotateAngle)
-                  .Vector2Field("Rotate Offset", ref element.rotateOffset)
-                  .ColorField("Color", ref element.color)
-                  .ColorField("Content Color", ref element.contentColor)
-                  .ColorField("Background Color", ref element.backgroundColor);
+                  .FloatField("Rotate Angle", ref node.rotateAngle)
+                  .Vector2Field("Rotate Offset", ref node.rotateOffset)
+                  .ColorField("Color", ref node.color)
+                  .ColorField("Content Color", ref node.contentColor)
+                  .ColorField("Background Color", ref node.backgroundColor);
         }
         private bool HeadGUI(bool bo, string title)
         {
             this.BeginHorizontal()
                     .Foldout(ref bo, title, true)
-                    .Pan(() => { element.active = EditorGUILayout.Toggle(element.active, GUILayout.Width(18)); })
-                    .Button(() => { element.Reset(); }, EditorGUIUtility.IconContent("d_TreeEditor.Refresh"), GUILayout.Width(25))
+                    .Pan(() => { node.active = EditorGUILayout.Toggle(node.active, GUILayout.Width(18)); })
+                    .Button(() => { node.Reset(); }, EditorGUIUtility.IconContent("d_TreeEditor.Refresh"), GUILayout.Width(25))
                 .EndHorizontal();
             return bo;
         }
@@ -372,11 +372,11 @@ namespace IFramework.GUITool.RectDesign
             preMat4x4 = GUI.matrix;
             preEnable = GUI.enabled;
 
-            GUI.color = element.color;
-            GUI.backgroundColor = element.backgroundColor;
-            GUI.contentColor = element.contentColor;
-            Vector2 tmp = new Vector2(element.rotateOffset.x * element.position.width, element.rotateOffset.y * element.position.height);
-            GUIUtility.RotateAroundPivot(element.rotateAngle, element.position.center + tmp);
+            GUI.color = node.color;
+            GUI.backgroundColor = node.backgroundColor;
+            GUI.contentColor = node.contentColor;
+            Vector2 tmp = new Vector2(node.rotateOffset.x * node.position.width, node.rotateOffset.y * node.position.height);
+            GUIUtility.RotateAroundPivot(node.rotateAngle, node.position.center + tmp);
 
             //bool bo = this.element.enable;
             //if (bo)
@@ -397,9 +397,9 @@ namespace IFramework.GUITool.RectDesign
         {
 
 
-            if (GUINodeSelection.node == this.element)
+            if (GUINodeSelection.node == this.node)
             {
-                element.position.DrawOutLine(6, Color.magenta);
+                node.position.DrawOutLine(6, Color.magenta);
             }
             GUI.backgroundColor = preBgColor;
             GUI.contentColor = preContentColor;
@@ -407,13 +407,13 @@ namespace IFramework.GUITool.RectDesign
             GUI.matrix = preMat4x4;
             GUI.color = preColor;
             GUI.enabled = preEnable;
-            if (GUINodeSelection.node == this.element)
+            if (GUINodeSelection.node == this.node)
             {
-                element.calculator.OnGUI();
+                node.calculator.OnGUI();
             }
-            if (GUINodeSelection.node != null && GUINodeSelection.node.parent == this.element)
+            if (GUINodeSelection.node != null && GUINodeSelection.node.parent == this.node)
             {
-                element.position.DrawOutLine(2, Color.blue);
+                node.position.DrawOutLine(2, Color.blue);
             }
         }
         public virtual void OnSceneGUI(Action children)

@@ -15,7 +15,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(Image))]
     public class ImageEditor : GUINodeEditor
     {
-        private Image image { get { return element as Image; } }
+        private Image image { get { return node as Image; } }
         private bool insFold = true;
         public override void OnSceneGUI(Action children)
         {

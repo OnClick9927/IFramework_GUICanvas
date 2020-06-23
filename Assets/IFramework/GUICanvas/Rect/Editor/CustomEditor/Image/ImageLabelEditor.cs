@@ -14,7 +14,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ImageLabel))]
     public class ImageLabelEditor : ImageNodeEditor
     {
-        private ImageLabel image { get { return element as ImageLabel; } }
+        private ImageLabel image { get { return node as ImageLabel; } }
 
         public override void OnSceneGUI(Action children)
         {

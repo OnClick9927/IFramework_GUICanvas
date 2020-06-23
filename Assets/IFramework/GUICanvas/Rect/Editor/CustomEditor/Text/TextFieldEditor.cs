@@ -14,14 +14,14 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(TextField))]
     public class TextFieldEditor : TextNodeEditor
     {
-        private TextField textElement { get { return element as TextField; } }
+        private TextField textElement { get { return node as TextField; } }
 
         private GUIStyleEditor textStyleDrawer;
         public override void OnSceneGUI(Action children)
         {
             base.OnSceneGUI(children);
 
-            if (!element.active) return;
+            if (!node.active) return;
 
             BeginGUI();
             textElement.text = GUI.TextField(textElement.position, textElement.text, textElement.textStyle);

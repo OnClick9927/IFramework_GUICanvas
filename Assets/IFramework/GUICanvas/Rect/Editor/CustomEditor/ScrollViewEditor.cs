@@ -15,7 +15,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ScrollView))]
     public class ScrollViewEditor : GUINodeEditor
     {
-        private ScrollView ele { get { return element as ScrollView; } }
+        private ScrollView ele { get { return node as ScrollView; } }
         private bool insFold = true;
         private GUIStyleEditor HstyleDrawer;
         private GUIStyleEditor VstyleDrawer;

@@ -14,7 +14,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(Toggle))]
     public class ToggleEditor : ImageToggleEditor
     {
-        private Toggle toggle { get { return element as Toggle; } }
+        private Toggle toggle { get { return node as Toggle; } }
         private bool insFold = true;
 
         public override void OnSceneGUI(Action children)

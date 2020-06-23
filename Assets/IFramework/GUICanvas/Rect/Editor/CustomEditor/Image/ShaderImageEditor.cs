@@ -15,7 +15,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ShaderImage))]
     public class ShaderImageEditor : GUINodeEditor
     {
-        private ShaderImage image { get { return element as ShaderImage; } }
+        private ShaderImage image { get { return node as ShaderImage; } }
         private bool insFold = true;
 
         public override void OnSceneGUI(Action children)

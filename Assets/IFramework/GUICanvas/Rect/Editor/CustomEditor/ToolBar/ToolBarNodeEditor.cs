@@ -11,7 +11,7 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(ToolBarNode))]
     public class ToolBarNodeEditor : GUINodeEditor
     {
-        private ToolBarNode toolbar { get { return element as ToolBarNode; } }
+        private ToolBarNode toolbar { get { return node as ToolBarNode; } }
         private bool insFold = true;
         private GUIStyleEditor styleDrawer;
 

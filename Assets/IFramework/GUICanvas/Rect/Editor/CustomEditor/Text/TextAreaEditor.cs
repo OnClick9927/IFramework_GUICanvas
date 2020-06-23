@@ -14,14 +14,14 @@ namespace IFramework.GUITool.RectDesign
     [CustomGUINode(typeof(TextArea))]
     public class TextAreaEditor : TextNodeEditor
     {
-        private TextArea textElement { get { return element as TextArea; } }
+        private TextArea textElement { get { return node as TextArea; } }
 
         private GUIStyleEditor textStyleDrawer;
         public override void OnSceneGUI(Action children)
         {
             base.OnSceneGUI(children);
 
-            if (!element.active) return;
+            if (!node.active) return;
 
             BeginGUI();
             textElement.text = GUI.TextArea(textElement.position, textElement.text, textElement.textStyle);
