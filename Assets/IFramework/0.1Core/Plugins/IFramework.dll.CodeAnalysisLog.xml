@@ -1,0 +1,825 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2017\professional\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="15.0">
+ <Targets>
+  <Target Name="E:\Project\Unity\IF_Git\Assets\IFramework\0.1Core\Plugins\IFramework.dll">
+   <Modules>
+    <Module Name="iframework.dll">
+     <Namespaces>
+      <Namespace Name="IFramework">
+       <Types>
+        <Type Name="FrameworkEnvironment" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onDispose" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onInit" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#update" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FrameworkObject" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'FrameworkObject' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework" File="FrameworkObject.cs" Line="19">修改 'FrameworkObject.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework" File="FrameworkObject.cs" Line="19">确保将 'FrameworkObject.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="IO" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ReadText(System.String,System.Text.Encoding)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="不要多次释放对象" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Extension" File="IO.cs" Line="91">可以在方法 'IO.ReadText(this string, Encoding)' 中多次释放对象 'fs'。若要避免生成 System.ObjectDisposedException，不应对一个对象多次调用 Dispose。: Lines: 91</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#WriteText(System.String,System.String,System.Text.Encoding)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="不要多次释放对象" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Extension" File="IO.cs" Line="114">可以在方法 'IO.WriteText(this string, string, Encoding)' 中多次释放对象 'fs'。若要避免生成 System.ObjectDisposedException，不应对一个对象多次调用 Dispose。: Lines: 114</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ObjectPool`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="ObjectPool.cs" Line="352">修改 'ObjectPool&lt;T&gt;.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onClearObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onCreateObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onGetObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onSetObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="RecyclableObjectCollection" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'RecyclableObjectCollection' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework" File="RecyclableObject.cs" Line="191">修改 'RecyclableObjectCollection.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Inject">
+       <Types>
+        <Type Name="IFrameworkContainer" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onNotExistType" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'OnContainerNotExistType' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Return" Certainty="95" Level="Error">更改 'OnContainerNotExistType' 以返回 void。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'OnContainerNotExistType' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Modules">
+       <Types>
+        <Type Name="FrameworkModule" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules" File="FrameworkModule.cs" Line="126">修改 'FrameworkModule.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules" File="FrameworkModule.cs" Line="126">确保将 'FrameworkModule.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FrameworkModuleContainer" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onModuleNotExist" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action&lt;Type, string&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action&lt;Type, string&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="UpdateFrameworkModule" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules" File="UpdateFrameworkModule.cs" Line="35">修改 'UpdateFrameworkModule.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules" File="UpdateFrameworkModule.cs" Line="35">确保将 'UpdateFrameworkModule.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Modules.Coroutine">
+       <Types>
+        <Type Name="Coroutine" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onCompelete" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="CoroutineInstruction" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Modules\Coroutine" File="CoroutineInstruction.cs" Line="19">'CoroutineInstruction.CoroutineInstruction()' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CoroutineInstruction..ctor()&#xD;&#xA;CoroutineInstruction.InnerLogoc():IEnumerator。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Modules.Fsm">
+       <Types>
+        <Type Name="Condition`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(IFramework.Modules.Fsm.ConditionValue`1&lt;!0&gt;,System.Object,IFramework.Modules.Fsm.CompareType)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Modules\Fsm\Condition" File="Condition.cs" Line="43">'Condition&lt;T&gt;.Condition(ConditionValue&lt;T&gt;, object, CompareType)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;Condition&lt;T&gt;..ctor(ConditionValue&lt;T&gt;, Object, CompareType)&#xD;&#xA;Condition&lt;T&gt;.SetConditionType(CompareType):CompareType。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FsmModule" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onStateChange" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action&lt;IState&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action&lt;IState&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Modules.MVVM">
+       <Types>
+        <Type Name="MVVMGroup" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'MVVMGroup' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules\MVVM" File="MVVMGroup.cs" Line="130">修改 'MVVMGroup.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="View" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules\MVVM" File="View.cs" Line="55">修改 'View.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Modules.Resources">
+       <Types>
+        <Type Name="ResourceLoader" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Modules\Resources" File="ResourceLoader.cs" Line="73">'ResourceLoader.ResourceLoader()' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;ResourceLoader..ctor()&#xD;&#xA;ResourceLoader.CreateResource():Resource。</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Modules\Resources" File="ResourceLoader.cs" Line="73">'ResourceLoader.ResourceLoader()' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;ResourceLoader..ctor()&#xD;&#xA;ResourceLoader.set__isdone(Boolean):Void。</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Modules\Resources" File="ResourceLoader.cs" Line="73">'ResourceLoader.ResourceLoader()' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;ResourceLoader..ctor()&#xD;&#xA;ResourceLoader.set__progress(Single):Void。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Modules\Resources" File="ResourceLoader.cs" Line="87">修改 'ResourceLoader.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Net">
+       <Types>
+        <Type Name="FileDownLoader" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Net\DownLoad" File="FileDownLoader.cs" Line="58">修改 'FileDownLoader.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Net\DownLoad" File="FileDownLoader.cs" Line="58">确保将 'FileDownLoader.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onCompeleted" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FileDownLoader_Http" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Net\DownLoad" File="FileDownLoader_Http.cs" Line="94">修改 'FileDownLoader_Http.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Net\DownLoad" File="FileDownLoader_Http.cs" Line="94">确保将 'FileDownLoader_Http.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="NetConnectionTokenPool" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'NetConnectionTokenPool' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员: 'Timer'。如果以前提供过 'NetConnectionTokenPool'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="SocketSend" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="False">
+           <Messages>
+            <Message Id="_sendArgs" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\UDP" File="SocketSend.cs" Line="61">'SocketSend' 包含 IDisposable 类型的字段 'SocketSend._sendArgs': 'SocketEventArgPool'。请更改 'SocketSend' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="TcpClientToken" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ConnectAsync(System.Int32,System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="不要多次释放对象" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\TCP" File="TcpClientToken.cs" Line="170">可以在方法 'TcpClientToken.ConnectAsync(int, string)' 中多次释放对象 'this'。若要避免生成 System.ObjectDisposedException，不应对一个对象多次调用 Dispose。: Lines: 170</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ConnectSync(System.Int32,System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="不要多次释放对象" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\TCP" File="TcpClientToken.cs" Line="135">可以在方法 'TcpClientToken.ConnectSync(int, string)' 中多次释放对象 'this'。若要避免生成 System.ObjectDisposedException，不应对一个对象多次调用 Dispose。: Lines: 135</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ConnectTo(System.Int32,System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="不要多次释放对象" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\TCP" File="TcpClientToken.cs" Line="107">可以在方法 'TcpClientToken.ConnectTo(int, string)' 中多次释放对象 'this'。若要避免生成 System.ObjectDisposedException，不应对一个对象多次调用 Dispose。: Lines: 107</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_autoReset" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\TCP" File="TcpClientToken.cs" Line="59">'TcpClientToken' 包含 IDisposable 类型的字段 'TcpClientToken._autoReset': 'AutoResetEvent'。请更改 'TcpClientToken' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+            <Message Id="_sendArgs" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\TCP" File="TcpClientToken.cs" Line="59">'TcpClientToken' 包含 IDisposable 类型的字段 'TcpClientToken._sendArgs': 'SocketEventArgPool'。请更改 'TcpClientToken' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="UdpClientToken" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_mReset" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\UDP" File="UdpClientToken.cs" Line="47">'UdpClientToken' 包含 IDisposable 类型的字段 'UdpClientToken._mReset': 'ManualResetEvent'。请更改 'UdpClientToken' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+            <Message Id="_sendArgs" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\UDP" File="UdpClientToken.cs" Line="47">'UdpClientToken' 包含 IDisposable 类型的字段 'UdpClientToken._sendArgs': 'SocketEventArgPool'。请更改 'UdpClientToken' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="WSClientToken" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'WSClientToken' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_token" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\WebSoc" File="WSClientToken.cs" Line="42">'WSClientToken' 包含 IDisposable 类型的字段 'WSClientToken._token': 'TcpClientToken'。请更改 'WSClientToken' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\WebSoc" File="WSClientToken.cs" Line="42">修改 'WSClientToken.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="WSServerToken" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'WSServerToken' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_token" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\WebSoc" File="WSServerToken.cs" Line="51">'WSServerToken' 包含 IDisposable 类型的字段 'WSServerToken._token': 'TcpServerToken'。请更改 'WSServerToken' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
+            </Message>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Net\Socket\WebSoc" File="WSServerToken.cs" Line="51">修改 'WSServerToken.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.NodeAction">
+       <Types>
+        <Type Name="ActionNode" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onBegin" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onCompelete" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onDispose" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onFrame" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#onRecyle" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Action' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Action' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Packets">
+       <Types>
+        <Type Name="PacketQueue" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+           <Issue Name="NonBreaking" Certainty="95" Level="CriticalError">在 'PacketQueue' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员: 'CycQueue&lt;byte&gt;'。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Pool">
+       <Types>
+        <Type Name="BaseTypePool`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="ObjectPool.cs" Line="286">修改 'BaseTypePool&lt;T&gt;.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="CachePool`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'CachePool&lt;T&gt;' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#.ctor(IFramework.Pool.RunningPool`1&lt;!0&gt;,IFramework.Pool.SleepingPool`1&lt;!0&gt;)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="42">'CachePool&lt;T&gt;.CachePool(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;)&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, Boolean, Int32)&#xD;&#xA;CachePool&lt;T&gt;.set_RunningPoool(RunningPool&lt;T&gt;):Void。</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="42">'CachePool&lt;T&gt;.CachePool(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;)&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, Boolean, Int32)&#xD;&#xA;CachePool&lt;T&gt;.set_SleepPool(SleepingPool&lt;T&gt;):Void。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#.ctor(IFramework.Pool.RunningPool`1&lt;!0&gt;,IFramework.Pool.SleepingPool`1&lt;!0&gt;,System.Boolean,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="43">'CachePool&lt;T&gt;.CachePool(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, bool, int)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, Boolean, Int32)&#xD;&#xA;CachePool&lt;T&gt;.set_RunningPoool(RunningPool&lt;T&gt;):Void。</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="43">'CachePool&lt;T&gt;.CachePool(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, bool, int)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, Boolean, Int32)&#xD;&#xA;CachePool&lt;T&gt;.set_SleepPool(SleepingPool&lt;T&gt;):Void。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#.ctor(IFramework.Pool.SleepingPool`1&lt;!0&gt;)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="41">'CachePool&lt;T&gt;.CachePool(SleepingPool&lt;T&gt;)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CachePool&lt;T&gt;..ctor(SleepingPool&lt;T&gt;)&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, Boolean, Int32)&#xD;&#xA;CachePool&lt;T&gt;.set_RunningPoool(RunningPool&lt;T&gt;):Void。</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="41">'CachePool&lt;T&gt;.CachePool(SleepingPool&lt;T&gt;)' 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: &#xD;&#xA;&#xD;&#xA;CachePool&lt;T&gt;..ctor(SleepingPool&lt;T&gt;)&#xD;&#xA;CachePool&lt;T&gt;..ctor(RunningPool&lt;T&gt;, SleepingPool&lt;T&gt;, Boolean, Int32)&#xD;&#xA;CachePool&lt;T&gt;.set_SleepPool(SleepingPool&lt;T&gt;):Void。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="52">修改 'CachePool&lt;T&gt;.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="52">确保将 'CachePool&lt;T&gt;.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnClearObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="36">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="36">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnCreateObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="39">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="39">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnGetObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="37">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="37">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnRunningPoolClearObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="31">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="31">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnRunningPoolCreateObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="34">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="34">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnRunningPoolGetObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="32">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="32">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnRunningPoolSetObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="33">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="33">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OnSetObject" Kind="Event" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="38">将 'Action&lt;T, IEventArgs&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="CachePool.cs" Line="38">将 'Action&lt;T, IEventArgs&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="PoolManager" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="PoolManager.cs" Line="38">修改 'PoolManager.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Pool" File="PoolManager.cs" Line="38">确保将 'PoolManager.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="PoolObjectPool" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="IDisposableReimplementation" Certainty="95" Level="Error">从 'PoolObjectPool' 实现的接口列表中移除 IDisposable，并重写 Dispose 基类实现。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PoolObjectPool`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="IDisposableReimplementation" Certainty="95" Level="Error">从 'PoolObjectPool&lt;T&gt;' 实现的接口列表中移除 IDisposable，并重写 Dispose 基类实现。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Serialization.DataTable">
+       <Types>
+        <Type Name="DataReader" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'DataReader' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Serialization\DataTable" File="DataReader.cs" Line="74">修改 'DataReader.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="DataWriter" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+           <Issue Name="ProvideDisposeBool" Certainty="95" Level="Error">对 'DataWriter' 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Serialization\DataTable" File="DataWriter.cs" Line="52">修改 'DataWriter.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Serialization.Simple">
+       <Types>
+        <Type Name="Serializer" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#onSerialize" Kind="Event" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="First" Certainty="95" Level="Error">将 'Func&lt;Type, Serializer&gt;' 的第一个参数声明为一个名为“sender”的对象。</Issue>
+             <Issue Name="Return" Certainty="95" Level="Error">更改 'Func&lt;Type, Serializer&gt;' 以返回 void。</Issue>
+             <Issue Name="Second" Certainty="95" Level="Error">将 'Func&lt;Type, Serializer&gt;' 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="IFramework.Singleton">
+       <Types>
+        <Type Name="Singleton`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Singleton" File="Singleton.cs" Line="26">修改 'Singleton&lt;T&gt;.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Singleton" File="Singleton.cs" Line="26">确保将 'Singleton&lt;T&gt;.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="SingletonPropertyClass`1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2020-06-13 03:55:01Z" FixCategory="Breaking">
+             <Issue Name="DisposeImplementation" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Singleton" File="SingletonPropertyClass.cs" Line="14">修改 'SingletonPropertyClass&lt;T&gt;.Dispose()'，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Issue>
+             <Issue Name="DisposeSignature" Certainty="95" Level="Error" Path="E:\Project\VS\IFramework\IFramework\Singleton" File="SingletonPropertyClass.cs" Line="14">确保将 'SingletonPropertyClass&lt;T&gt;.Dispose()' 声明为 public 和 sealed。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009">
+   <Name>正确声明事件处理程序</Name>
+   <Description>按照约定，.NET 事件有两个参数，分别用于指定事件发送方和事件数据。事件处理程序签名应遵循以下形式: void MyEventHandler(object sender, EventArgs e)。“sender”参数的类型始终是 System.Object，即使该参数可能使用更具体的类型。“e”参数的类型始终是 System.EventArgs。不提供事件数据的事件应使用 System.EventHandler 委托类型。事件处理程序返回 void 以便将每个事件发送给多个目标方法。目标返回的任何值在第一次调用之后将会丢失。</Description>
+   <Resolution Name="First">将 {0} 的第一个参数声明为一个名为“sender”的对象。</Resolution>
+   <Resolution Name="Return">更改 {0} 以返回 void。</Resolution>
+   <Resolution Name="Second">将 {0} 的第二个参数声明为 EventArgs，或者声明为扩展 EventArgs 的类型的名为“e”的实例。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182133.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213">
+   <Name>应释放可释放的字段</Name>
+   <Description>如果实现了 IDisposable 的类型拥有同样实现 IDisposable 的字段，则封装类型的 Dispose() 实现应对每个可释放字段调用 Dispose()。</Description>
+   <Resolution Name="Default">{0} 包含 IDisposable 类型的字段 {1}: {2}。请更改 {0} 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182328.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="usagerules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214">
+   <Name>不要在构造函数中调用可重写的方法</Name>
+   <Description>不应通过构造函数调用类中定义的虚方法。如果某个派生类已重写该虚方法，则将在调用派生类的构造函数前，调用此派生类重写后的方法。</Description>
+   <Resolution Name="Default">{0} 包含调用链，该调用链导致调用此类所定义的虚方法。请检查以下调用堆栈，看是否有意外结果: {1}。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182331.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalWarning</MessageLevel>
+   <File Name="usagerules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063">
+   <Name>正确实现 IDisposable</Name>
+   <Description>所有 IDisposable 类型都应正确实现 Dispose 模式。</Description>
+   <Resolution Name="DisposeImplementation">修改 {0}，使它先调用 Dispose(true)，然后对当前对象实例(在 Visual Basic 中为“this”或“Me”)调用 GC.SuppressFinalize，最后返回。</Resolution>
+   <Resolution Name="DisposeSignature">确保将 {0} 声明为 public 和 sealed。</Resolution>
+   <Resolution Name="IDisposableReimplementation">从 {0} 实现的接口列表中移除 IDisposable，并重写 Dispose 基类实现。</Resolution>
+   <Resolution Name="ProvideDisposeBool">对 {0} 提供 Dispose(bool) 的可重写实现或将该类型标记为密封。对 Dispose(false) 的调用应仅清理本机资源。对 Dispose(true) 的调用应既清理托管资源又清理本机资源。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms244737.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
+   <Name>具有可释放字段的类型应该是可释放的</Name>
+   <Description>声明可释放成员的类型也应实现 IDisposable。如果该类型没有任何非托管资源，请不要在其上实现终结器。</Description>
+   <Resolution Name="DependsOnFix">在 {0} 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员: {1}。如果以前提供过 {0}，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Resolution>
+   <Resolution Name="NonBreaking">在 {0} 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员: {1}。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182172.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="不要多次释放对象" Category="Microsoft.Usage" CheckId="CA2202">
+   <Name>不要多次释放对象</Name>
+   <Description>可以多次调用正确实现的 Dispose 方法，而不会引发异常。但是，并不保证所有情况下都会如此。若要避免生成 System.ObjectDisposedException，您不应对一个对象多次调用 Dispose。</Description>
+   <Resolution Name="Default">可以在方法 {1} 中多次释放对象 {0}。若要避免生成 System.ObjectDisposedException，不应对一个对象多次调用 Dispose。: Lines: 170</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182334.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="15.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">类别</String>
+  <String Key="Certainty">确定性</String>
+  <String Key="CollapseAll">全部折叠</String>
+  <String Key="CheckId">检查 ID</String>
+  <String Key="Error">错误</String>
+  <String Key="Errors">错误</String>
+  <String Key="ExpandAll">全部展开</String>
+  <String Key="Help">帮助</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">消息</String>
+  <String Key="LocationNotStoredInPdb">[位置未存储在 Pdb 中]</String>
+  <String Key="Project">项目</String>
+  <String Key="Resolution">解析</String>
+  <String Key="Rule">规则</String>
+  <String Key="RuleFile">规则文件</String>
+  <String Key="RuleDescription">规则说明</String>
+  <String Key="Source">源</String>
+  <String Key="Status">状态</String>
+  <String Key="Target">目标</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">代码分析报告</String>
+ </Localized>
+</FxCopReport>
