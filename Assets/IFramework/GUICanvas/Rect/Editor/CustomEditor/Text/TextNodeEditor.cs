@@ -25,7 +25,7 @@ namespace IFramework.GUITool.RectDesign
             base.OnInspectorGUI();
             if (textStyleDrawer == null)
                 textStyleDrawer = new GUIStyleEditor(textElement.textStyle, "Text Style");
-            insFold = FormatInspectorHeadGUI(insFold, "Text Element", null, ContentGUI);
+            insFold = FormatInspectorHeadGUI(insFold, "Text ", null, ContentGUI);
         }
         private void ContentGUI()
         {

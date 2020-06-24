@@ -34,7 +34,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
 
-            GUILayout.BeginArea(areaRect, new GUIContent(text, image, tooltip), imageStyle);
+            GUILayout.BeginArea(areaRect, new GUIContent(text, image, tooltip), style);
             OnGUI_Children();
             GUILayout.EndArea();
         }

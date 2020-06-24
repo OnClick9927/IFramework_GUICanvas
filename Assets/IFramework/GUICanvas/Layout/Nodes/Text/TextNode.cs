@@ -23,16 +23,16 @@ namespace IFramework.GUITool.LayoutDesign
         public TextClipping overflow;
         public bool richText;
 
-        protected GUIStyle m_style;
-        public virtual GUIStyle textStyle
+        protected GUIStyle _style;
+        public virtual GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.label);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.label);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         protected TextNode() : base() { }
@@ -46,7 +46,7 @@ namespace IFramework.GUITool.LayoutDesign
             alignment = other.alignment;
             overflow = other.overflow;
             richText = other.richText;
-            m_style = new GUIStyle(other.m_style);
+            _style = new GUIStyle(other._style);
         }
         public override void Reset()
         {
@@ -62,12 +62,12 @@ namespace IFramework.GUITool.LayoutDesign
         }
         protected override void OnGUI_Self()
         {
-            textStyle.font = font;
-            textStyle.fontStyle = fontStyle;
-            textStyle.fontSize = fontSize;
-            textStyle.alignment = alignment;
-            textStyle.clipping = overflow;
-            textStyle.richText = richText;
+            style.font = font;
+            style.fontStyle = fontStyle;
+            style.fontSize = fontSize;
+            style.alignment = alignment;
+            style.clipping = overflow;
+            style.richText = richText;
         }
        
 
@@ -82,7 +82,7 @@ namespace IFramework.GUITool.LayoutDesign
             SerializeField(root, "richText", richText);
             SerializeField(root, "text", text);
             SerializeField(root, "tooltip", tooltip);
-            root.AppendChild(new GUIStyleSerializer(textStyle, "Text Style").Serializate(doc));
+            root.AppendChild(new GUIStyleSerializer(style, "Text Style").Serializate(doc));
             return root;
         }
         public override void DeSerialize(XmlElement root)
@@ -97,9 +97,9 @@ namespace IFramework.GUITool.LayoutDesign
             DeSerializeField(root, "tooltip", ref tooltip);
 
             XmlElement styleE = root.SelectSingleNode("GUIStyle") as XmlElement;
-            m_style = new GUIStyle();
+            _style = new GUIStyle();
 
-            new GUIStyleSerializer(textStyle, "Text Style").DeSerializate(styleE);
+            new GUIStyleSerializer(style, "Text Style").DeSerializate(styleE);
         }
     }
 

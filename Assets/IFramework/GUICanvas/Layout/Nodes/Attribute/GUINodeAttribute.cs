@@ -14,10 +14,10 @@ namespace IFramework.GUITool.LayoutDesign
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class GUINodeAttribute : Attribute
     {
-        public string CreatPath { get; private set; }
+        public string path { get; private set; }
         public GUINodeAttribute(string path)
         {
-            this.CreatPath = path;
+            this.path = path;
         }
     }
 }

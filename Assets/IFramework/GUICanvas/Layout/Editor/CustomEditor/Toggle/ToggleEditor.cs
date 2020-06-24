@@ -30,7 +30,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!toggle.active) return;
             BeginGUI();
-            toggle.value = GUILayout.Toggle(toggle.value, new GUIContent(toggle.text, toggle.image, toggle.tooltip), toggle.imageStyle, CalcGUILayOutOptions());
+            toggle.value = GUILayout.Toggle(toggle.value, new GUIContent(toggle.text, toggle.image, toggle.tooltip), toggle.style, CalcGUILayOutOptions());
             toggle.position = GUILayoutUtility.GetLastRect();
             EndGUI();
         }

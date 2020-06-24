@@ -14,15 +14,15 @@ namespace IFramework.GUITool.LayoutDesign
     [GUINode("Horizontal/ImageHorizontal")]
     public class ImageHorizontal : ParentImageNode
     {
-        public override GUIStyle imageStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.label);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.label);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         public ImageHorizontal() : base() { }
@@ -31,7 +31,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
 
-            GUILayout.BeginHorizontal(image, imageStyle, CalcGUILayOutOptions());
+            GUILayout.BeginHorizontal(image, style, CalcGUILayOutOptions());
             OnGUI_Children();
             GUILayout.EndHorizontal();
         }

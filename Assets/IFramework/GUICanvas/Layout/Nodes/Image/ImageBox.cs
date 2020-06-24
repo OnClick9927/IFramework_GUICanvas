@@ -19,7 +19,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
 
-            GUILayout.Box(image, imageStyle, CalcGUILayOutOptions());
+            GUILayout.Box(image, style, CalcGUILayOutOptions());
             position = GUILayoutUtility.GetLastRect();
         }
       

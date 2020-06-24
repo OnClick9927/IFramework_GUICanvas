@@ -63,7 +63,7 @@ namespace IFramework
                     .Space(10);
             //.FlexibleSpace();
           
-            this.Label("LogSetting",new GUIStyle("IN Title"))
+            this.Label("LogSetting",GUIStyles.Get("IN Title"))
                 .IntField("Log Lev", ref Info.lev_L)
                 .IntField("Warning Lev", ref Info.lev_W)
                 .IntField("Error Lev", ref Info.lev_E)

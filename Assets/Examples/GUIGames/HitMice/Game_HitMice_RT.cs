@@ -83,7 +83,7 @@ namespace IFramework_Demo.GUIGames
         }
         List<BtnMice> btns = new List<BtnMice>();
         GUICanvasComponet comp { get { return GetComponent<GUICanvasComponet>(); } }
-        GUICanvas guiCanvas { get { return comp.guiCanvas; } }
+        GUICanvas guiCanvas { get { return comp.canvas; } }
         private void Start()
         {
             btns.Clear();

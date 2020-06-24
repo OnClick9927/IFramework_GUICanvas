@@ -14,15 +14,15 @@ namespace IFramework.GUITool.LayoutDesign
     [GUINode("Vertical/ImageVertical")]
     public class ImageVertical : ParentImageNode
     {
-        public override GUIStyle imageStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.label);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.label);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
         public ImageVertical() : base() { }
         public ImageVertical(ImageVertical other) : base(other) { }
@@ -30,7 +30,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
 
-            GUILayout.BeginVertical(image, imageStyle, CalcGUILayOutOptions());
+            GUILayout.BeginVertical(image, style, CalcGUILayOutOptions());
             OnGUI_Children();
             GUILayout.EndVertical();
         }

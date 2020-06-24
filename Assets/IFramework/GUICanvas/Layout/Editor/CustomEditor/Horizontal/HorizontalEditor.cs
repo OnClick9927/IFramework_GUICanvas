@@ -30,7 +30,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!ele.active) return;
             BeginGUI();
-            GUILayout.BeginHorizontal(new GUIContent(ele.text, ele.image, ele.tooltip), ele.imageStyle, CalcGUILayOutOptions());
+            GUILayout.BeginHorizontal(new GUIContent(ele.text, ele.image, ele.tooltip), ele.style, CalcGUILayOutOptions());
             if (child != null) child();
 
             GUILayout.EndHorizontal();

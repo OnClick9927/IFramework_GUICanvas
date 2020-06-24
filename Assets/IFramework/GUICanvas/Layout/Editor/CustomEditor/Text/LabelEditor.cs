@@ -24,7 +24,7 @@ namespace IFramework.GUITool.LayoutDesign
             if (!node.active) return;
 
             BeginGUI();
-            GUILayout.Label(new GUIContent(textElement.text, textElement.tooltip), textElement.textStyle, CalcGUILayOutOptions());
+            GUILayout.Label(new GUIContent(textElement.text, textElement.tooltip), textElement.style, CalcGUILayOutOptions());
             textElement.position = GUILayoutUtility.GetLastRect();
             EndGUI();
         }

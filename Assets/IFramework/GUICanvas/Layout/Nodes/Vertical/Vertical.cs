@@ -30,7 +30,7 @@ namespace IFramework.GUITool.LayoutDesign
         }
         protected override void OnGUI_Self()
         {
-            GUILayout.BeginVertical(new GUIContent(text, image, tooltip), imageStyle, CalcGUILayOutOptions());
+            GUILayout.BeginVertical(new GUIContent(text, image, tooltip), style, CalcGUILayOutOptions());
             OnGUI_Children();
             GUILayout.EndVertical();
         }

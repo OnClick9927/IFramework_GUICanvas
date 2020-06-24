@@ -241,9 +241,9 @@ namespace IFramework.GUITool.LayoutDesign
             GUINodeEditor des = _dic[ele.GetType()];
             des.node = ele;
             des.OnSceneGUI(() => {
-                for (int i = 0; i < ele.Children.Count; i++)
+                for (int i = 0; i < ele.children.Count; i++)
                 {
-                    EleGUI(ele.Children[i] as GUINode);
+                    EleGUI(ele.children[i] as GUINode);
                 }
             });
 
@@ -288,11 +288,11 @@ namespace IFramework.GUITool.LayoutDesign
                 this._element = element;
                 this.parent = parent;
                 _children = new List<Trunk>();
-                if (element.Children.Count > 0)
+                if (element.children.Count > 0)
                 {
-                    for (int i = 0; i < element.Children.Count; i++)
+                    for (int i = 0; i < element.children.Count; i++)
                     {
-                        _children.Add(new Trunk(this, element.Children[i] as GUINode));
+                        _children.Add(new Trunk(this, element.children[i] as GUINode));
                     }
                 }
             }
@@ -302,12 +302,12 @@ namespace IFramework.GUITool.LayoutDesign
                 List<Trunk> tep = new List<Trunk>();
                 tep.AddRange(_children);
                 _children.Clear();
-                for (int i = 0; i < _element.Children.Count; i++)
+                for (int i = 0; i < _element.children.Count; i++)
                 {
-                    var trunk = tep.Find((t) => { return t._element == _element.Children[i]; });
+                    var trunk = tep.Find((t) => { return t._element == _element.children[i]; });
                     if (trunk == null)
                     {
-                        _children.Add(new Trunk(this, _element.Children[i] as GUINode));
+                        _children.Add(new Trunk(this, _element.children[i] as GUINode));
                     }
                     else
                     {
@@ -483,7 +483,7 @@ namespace IFramework.GUITool.LayoutDesign
                 .FindAll((type) => { return !type.IsAbstract && type.IsDefined(typeof(GUINodeAttribute), false); });
                 types.ForEach((type) =>
                 {
-                    string createPath = (type.GetCustomAttributes(typeof(GUINodeAttribute), false).First() as GUINodeAttribute).CreatPath;
+                    string createPath = (type.GetCustomAttributes(typeof(GUINodeAttribute), false).First() as GUINodeAttribute).path;
                     menu.AddItem(new GUIContent("Create/" + createPath), false, () => { OnCeateElement(type); });
                 });
                 if (GUINodeSelection.copyNode == null)
@@ -500,7 +500,7 @@ namespace IFramework.GUITool.LayoutDesign
                         menu.AddDisabledItem(new GUIContent("MoveUp"));
                     else
                         menu.AddItem(new GUIContent("MoveUp"), false, OnMoveUp);
-                    if (_element.siblingIndex == _element.parent.Children.Count - 1)
+                    if (_element.siblingIndex == _element.parent.children.Count - 1)
                         menu.AddDisabledItem(new GUIContent("MoveDown"));
                     else
                         menu.AddItem(new GUIContent("MoveDown"), false, OnMoveDown);
@@ -527,7 +527,7 @@ namespace IFramework.GUITool.LayoutDesign
             private void OnMoveDown()
             {
                 int tmp = _element.siblingIndex;
-                if (tmp != _element.parent.Children.Count - 1)
+                if (tmp != _element.parent.children.Count - 1)
                 {
                     _element.siblingIndex = tmp + 1;
                 }

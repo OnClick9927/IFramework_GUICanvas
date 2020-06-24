@@ -30,7 +30,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!ele.active) return;
             BeginGUI();
-            GUILayout.BeginArea(ele.areaRect, ele.image, ele.imageStyle);
+            GUILayout.BeginArea(ele.areaRect, ele.image, ele.style);
             if (child != null) child();
             GUILayout.EndArea();
             EndGUI();

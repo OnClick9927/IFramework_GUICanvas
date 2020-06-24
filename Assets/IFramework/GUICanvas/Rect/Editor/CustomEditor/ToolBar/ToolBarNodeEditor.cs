@@ -21,7 +21,7 @@ namespace IFramework.GUITool.RectDesign
             base.OnInspectorGUI();
             if (styleDrawer == null)
                 styleDrawer = new GUIStyleEditor(toolbar.style, "ToolBar Style");
-            insFold = FormatInspectorHeadGUI(insFold, "ToolBar Element", null, ContentGUI);
+            insFold = FormatInspectorHeadGUI(insFold, "ToolBar ", null, ContentGUI);
         }
         private void ContentGUI()
         {

@@ -23,8 +23,8 @@ namespace IFramework.GUITool.LayoutDesign
         {
             base.OnInspectorGUI();
             if (textStyleDrawer == null)
-                textStyleDrawer = new GUIStyleDesign(textElement.textStyle, "Text Style");
-            insFold = FormatFoldGUI(insFold, "Text Element", null, ContentGUI);
+                textStyleDrawer = new GUIStyleDesign(textElement.style, "Text Style");
+            insFold = FormatFoldGUI(insFold, "Text", null, ContentGUI);
         }
         private void ContentGUI()
         {
@@ -47,12 +47,12 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (node.active)
             {
-                textElement.textStyle.font = textElement.font;
-                textElement.textStyle.fontStyle = textElement.fontStyle;
-                textElement.textStyle.fontSize = textElement.fontSize;
-                textElement.textStyle.alignment = textElement.alignment;
-                textElement.textStyle.clipping = textElement.overflow;
-                textElement.textStyle.richText = textElement.richText;
+                textElement.style.font = textElement.font;
+                textElement.style.fontStyle = textElement.fontStyle;
+                textElement.style.fontSize = textElement.fontSize;
+                textElement.style.alignment = textElement.alignment;
+                textElement.style.clipping = textElement.overflow;
+                textElement.style.richText = textElement.richText;
             }
         }
     }

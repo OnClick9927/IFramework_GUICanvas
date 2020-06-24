@@ -32,7 +32,7 @@ namespace IFramework.GUITool.LayoutDesign
 
         protected override bool DrawGUI()
         {
-            return GUILayout.Toggle(value, new GUIContent(text, image, tooltip), imageStyle, CalcGUILayOutOptions());
+            return GUILayout.Toggle(value, new GUIContent(text, image, tooltip), style, CalcGUILayOutOptions());
         }
 
         public override XmlElement Serialize(XmlDocument doc)

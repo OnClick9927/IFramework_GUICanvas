@@ -17,8 +17,8 @@ namespace IFramework.GUITool.LayoutDesign
         public float startValue;
         public float endValue;
         public float value;
-        protected GUIStyle m_slider;
-        protected GUIStyle m_thumb;
+        protected GUIStyle _slider;
+        protected GUIStyle _thumb;
         public abstract GUIStyle slider { get; set; }
         public abstract GUIStyle thumb { get; set; }
 
@@ -29,8 +29,8 @@ namespace IFramework.GUITool.LayoutDesign
             startValue = other.startValue;
             endValue = other.endValue;
             value = other.value;
-            m_slider = new GUIStyle(other.m_slider);
-            m_thumb = new GUIStyle(other.m_thumb);
+            _slider = new GUIStyle(other._slider);
+            _thumb = new GUIStyle(other._thumb);
         }
         public override void Reset()
         {
@@ -71,8 +71,8 @@ namespace IFramework.GUITool.LayoutDesign
             DeSerializeField(root, "startValue", ref startValue);
             DeSerializeField(root, "endValue", ref endValue);
             DeSerializeField(root, "value", ref value);
-            m_slider = new GUIStyle();
-            m_thumb = new GUIStyle();
+            _slider = new GUIStyle();
+            _thumb = new GUIStyle();
 
 
             XmlElement styleE = root.SelectSingleNode("Styles") as XmlElement;

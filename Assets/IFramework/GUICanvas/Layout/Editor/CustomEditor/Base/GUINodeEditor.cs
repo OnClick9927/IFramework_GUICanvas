@@ -178,7 +178,7 @@ namespace IFramework.GUITool.LayoutDesign
 
         public virtual void OnInspectorGUI()
         {
-            insFold = FormatFoldGUI(insFold, "Element:" + node.GetType().Name, HeadGUI, ContentGUI);
+            insFold = FormatFoldGUI(insFold, "Node:" + node.GetType().Name, HeadGUI, ContentGUI);
         }
         private void ContentGUI()
         {
@@ -212,10 +212,22 @@ namespace IFramework.GUITool.LayoutDesign
         private bool HeadGUI(bool bo, string title)
         {
             this.BeginHorizontal()
-                    .Foldout(ref bo, title, true)
-                    .Pan(() => { node.active = EditorGUILayout.Toggle(node.active, GUILayout.Width(18)); })
-                    .Button(() => { node.Reset(); }, EditorGUIUtility.IconContent("d_TreeEditor.Refresh"), GUILayout.Width(25))
+                .Pan(() => {
+                    GUILayout.Label(title, new GUIStyle("SettingsHeader"));
+                    Rect rect = GUILayoutUtility.GetLastRect();
+                    if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition) && Event.current.clickCount == 1)
+                    {
+                        bo = !bo;
+                        Event.current.Use();
+                    }
+                    node.active = EditorGUILayout.Toggle(node.active, GUILayout.Width(18));
+                })
+                .Button(() => { node.Reset(); }, EditorGUIUtility.IconContent("d_TreeEditor.Refresh"), GUILayout.Width(25))
                 .EndHorizontal();
+            if (bo)
+            {
+                GUILayout.Label("", new GUIStyle("IN Title"));
+            }
             return bo;
         }
 
@@ -241,9 +253,23 @@ namespace IFramework.GUITool.LayoutDesign
         {
             VerticalView(() => {
                 if (titledraw == null)
-                    fold = EditorGUILayout.Foldout(fold, title, true);
+                {
+                    //fold = EditorGUILayout.Foldout(fold, title, true, new GUIStyle("LargeBoldLabel"));
+                    GUILayout.Label(title, new GUIStyle("SettingsHeader"));
+                    Rect rect = GUILayoutUtility.GetLastRect();
+                    if (Event.current.type== EventType.MouseDown && rect.Contains(Event.current.mousePosition)&& Event.current.clickCount==1)
+                    {
+                        fold = !fold;
+                        Event.current.Use();
+                    }
+                    if (fold)
+                    {
+                        GUILayout.Label("", new GUIStyle("IN Title"));
+                    }  
+                }
+                   
                 else
-                    fold = titledraw(fold, title);
+                    fold = titledraw(fold, title);   
                 HorizontalView(() => {
                     GUILayout.Space(20);
                     VerticalView(() => {
@@ -254,6 +280,9 @@ namespace IFramework.GUITool.LayoutDesign
             }, "box");
             return fold;
         }
+
+
+
 
         public virtual void OnSceneGUI(Action child) { }
         private Color preContentColor;

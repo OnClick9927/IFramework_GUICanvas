@@ -14,20 +14,20 @@ namespace IFramework.GUITool.LayoutDesign
     public class GUICanvasComponet : MonoBehaviour
     {
         public TextAsset textAsset;
-        public GUICanvas guiCanvas = new GUICanvas();
+        public GUICanvas canvas = new GUICanvas();
         public void LoadCanvas(TextAsset textAsset)
         {
             this.textAsset = textAsset;
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(textAsset.text);
             //guiCanvas = new GUICanvas();
-            guiCanvas.DeSerialize(doc.DocumentElement);
+            canvas.DeSerialize(doc.DocumentElement);
         }
         private void OnGUI()
         {
-            if (guiCanvas != null)
+            if (canvas != null)
             {
-                guiCanvas.OnGUI();
+                canvas.OnGUI();
             }
         }
     }

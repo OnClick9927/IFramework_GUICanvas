@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace IFramework.GUITool.LayoutDesign
 {
-    [GUINode("TextToolBar/ImageToolBar")]
+    [GUINode("ToolBar/ImageToolBar")]
     public class ImageToolBar : ToolBarNode
     {
         public Texture2D[] texs;

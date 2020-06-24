@@ -14,23 +14,23 @@ namespace IFramework.GUITool.LayoutDesign
     public abstract class ParentImageNode : ParentGUINode
     {
         public Texture2D image;
-        protected GUIStyle m_style;
-        public virtual GUIStyle imageStyle
+        protected GUIStyle _style;
+        public virtual GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.label);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.label);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         protected ParentImageNode() : base() { }
         protected ParentImageNode(ParentImageNode other) : base(other)
         {
             image = other.image;
-            m_style = new GUIStyle(other.m_style);
+            _style = new GUIStyle(other._style);
         }
 
        
@@ -46,7 +46,7 @@ namespace IFramework.GUITool.LayoutDesign
             XmlElement root = base.Serialize(doc);
             if (image != null)
                 SerializeField(root, "image", image.CreateReadableTexture().EncodeToPNG());
-            root.AppendChild(new GUIStyleSerializer(imageStyle, "Image Style").Serializate(doc));
+            root.AppendChild(new GUIStyleSerializer(style, "Image Style").Serializate(doc));
             return root;
         }
         public override void DeSerialize(XmlElement root)
@@ -60,10 +60,10 @@ namespace IFramework.GUITool.LayoutDesign
                 image.LoadImage(bs);
                 image.hideFlags = HideFlags.DontSaveInEditor;
             }
-            m_style = new GUIStyle();
+            _style = new GUIStyle();
 
             XmlElement styleE = root.SelectSingleNode("GUIStyle") as XmlElement;
-            new GUIStyleSerializer(imageStyle, "Image Style").DeSerializate(styleE);
+            new GUIStyleSerializer(style, "Image Style").DeSerializate(styleE);
         }
     }
 

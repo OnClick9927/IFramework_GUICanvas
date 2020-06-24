@@ -20,7 +20,7 @@ namespace IFramework.GUITool.LayoutDesign
             base.OnInspectorGUI();
             if (styleDrawer == null)
                 styleDrawer = new GUIStyleDesign(toolbar.style, "ToolBar Style");
-            insFold = FormatFoldGUI(insFold, "ToolBar Element", null, ContentGUI);
+            insFold = FormatFoldGUI(insFold, "ToolBar", null, ContentGUI);
         }
         private void ContentGUI()
         {

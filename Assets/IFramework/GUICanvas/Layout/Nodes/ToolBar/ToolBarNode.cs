@@ -16,23 +16,23 @@ namespace IFramework.GUITool.LayoutDesign
     {
         public Action<int> onValueChange { get; set; }
         public int value;
-        private GUIStyle m_style;
+        private GUIStyle _style;
         public GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.button);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.button);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         protected ToolBarNode() : base() { }
         protected ToolBarNode(ToolBarNode other) : base(other)
         {
             value = other.value;
-            m_style = new GUIStyle(other.m_style);
+            _style = new GUIStyle(other._style);
         }
         public override void Reset()
         {
@@ -67,7 +67,7 @@ namespace IFramework.GUITool.LayoutDesign
             base.DeSerialize(root);
             DeSerializeField(root, "value", ref value);
             XmlElement styleE = root.SelectSingleNode("GUIStyle") as XmlElement;
-            m_style = new GUIStyle();
+            _style = new GUIStyle();
 
             new GUIStyleSerializer(style, "ToolBar Style").DeSerializate(styleE);
         }

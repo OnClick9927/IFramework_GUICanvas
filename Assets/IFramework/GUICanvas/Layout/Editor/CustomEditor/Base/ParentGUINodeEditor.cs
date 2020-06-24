@@ -19,19 +19,19 @@ namespace IFramework.GUITool.LayoutDesign
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            insFold = FormatFoldGUI(insFold, "Children Elements", null, ContentGUI);
+            insFold = FormatFoldGUI(insFold, "Children ", null, ContentGUI);
         }
         private void ContentGUI()
         {
             Event e = Event.current;
             using (new EditorGUI.DisabledScope(true))
             {
-                for (int i = 0; i < haveChildElement.Children.Count; i++)
+                for (int i = 0; i < haveChildElement.children.Count; i++)
                 {
-                    EditorGUILayout.TextField(haveChildElement.Children[i].GetType().Name, haveChildElement.Children[i].name, "ObjectField");
+                    EditorGUILayout.TextField(haveChildElement.children[i].GetType().Name, haveChildElement.children[i].name, "ObjectField");
                     Rect r = GUILayoutUtility.GetLastRect();
                     if (r.Contains(e.mousePosition) && e.clickCount == 2)
-                        GUINodeSelection.node = haveChildElement.Children[i] as GUINode;
+                        GUINodeSelection.node = haveChildElement.children[i] as GUINode;
                 }
             }
         }

@@ -19,28 +19,28 @@ namespace IFramework.GUITool.LayoutDesign
         public bool alwaysShowVertical;
         public Vector2 value;
         public Action<Vector2> onValueChange { get; set; }
-        private GUIStyle m_Hstyle;
-        private GUIStyle m_Vstyle;
+        private GUIStyle _Hstyle;
+        private GUIStyle _Vstyle;
 
         public GUIStyle Hstyle
         {
             get
             {
-                if (m_Hstyle == null)
-                    m_Hstyle = new GUIStyle(GUI.skin.horizontalScrollbar);
-                return m_Hstyle;
+                if (_Hstyle == null)
+                    _Hstyle = new GUIStyle(GUI.skin.horizontalScrollbar);
+                return _Hstyle;
             }
-            set { m_Hstyle = new GUIStyle(value); }
+            set { _Hstyle = new GUIStyle(value); }
         }
         public GUIStyle Vstyle
         {
             get
             {
-                if (m_Vstyle == null)
-                    m_Vstyle = new GUIStyle(GUI.skin.verticalScrollbar);
-                return m_Vstyle;
+                if (_Vstyle == null)
+                    _Vstyle = new GUIStyle(GUI.skin.verticalScrollbar);
+                return _Vstyle;
             }
-            set { m_Vstyle = new GUIStyle(value); }
+            set { _Vstyle = new GUIStyle(value); }
         }
         private GUIStyleSerializer HstyleDrawer;
         private GUIStyleSerializer VstyleDrawer;
@@ -51,8 +51,8 @@ namespace IFramework.GUITool.LayoutDesign
             alwaysShowHorizontal = other.alwaysShowHorizontal;
             alwaysShowVertical = other.alwaysShowVertical;
             value = other.value;
-            m_Hstyle = new GUIStyle(other.m_Hstyle);
-            m_Vstyle = new GUIStyle(other.m_Vstyle);
+            _Hstyle = new GUIStyle(other._Hstyle);
+            _Vstyle = new GUIStyle(other._Vstyle);
         }
         public override void Reset()
         {
@@ -93,8 +93,8 @@ namespace IFramework.GUITool.LayoutDesign
             DeSerializeField(root, "alwaysShowHorizontal", ref alwaysShowHorizontal);
             DeSerializeField(root, "alwaysShowVertical", ref alwaysShowVertical);
             DeSerializeField(root, "value", ref value);
-            m_Hstyle = new GUIStyle();
-            m_Vstyle = new GUIStyle();
+            _Hstyle = new GUIStyle();
+            _Vstyle = new GUIStyle();
 
 
             XmlElement styleE = root.SelectSingleNode("Styles") as XmlElement;

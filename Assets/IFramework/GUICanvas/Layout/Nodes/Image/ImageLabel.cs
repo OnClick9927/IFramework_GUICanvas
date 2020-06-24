@@ -14,21 +14,21 @@ namespace IFramework.GUITool.LayoutDesign
     [GUINode("Image/ImageLabel")]
     public class ImageLabel : ImageNode
     {
-        public override GUIStyle imageStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.label);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.label);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
         public ImageLabel() : base() { }
         public ImageLabel(ImageLabel other) : base(other) { }
         protected override void OnGUI_Self()
         {
-            GUILayout.Label(image, imageStyle, CalcGUILayOutOptions());
+            GUILayout.Label(image, style, CalcGUILayOutOptions());
             position = GUILayoutUtility.GetLastRect();
 
         }

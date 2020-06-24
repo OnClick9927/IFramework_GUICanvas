@@ -27,7 +27,7 @@ namespace IFramework.GUITool.LayoutDesign
                 return AssetDatabase.GetAssetPath(textAsset);
             }
         }
-        private GUICanvas canvas { get { return (target as GUICanvasComponet).guiCanvas; } }
+        private GUICanvas canvas { get { return (target as GUICanvasComponet).canvas; } }
         float scrollViewHeight=200;
         private void OnEnable()
         {

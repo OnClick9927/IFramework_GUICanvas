@@ -72,7 +72,7 @@ namespace IFramework.GUITool.LayoutDesign
             }
             if (image != null)
                 GUI.DrawTexture(position, image, mode, alphaBlend, imageAspect, color, borderWidths, borderRadius);
-            GUI.Label(position, new GUIContent(text, tooltip), textStyle);
+            GUI.Label(position, new GUIContent(text, tooltip), style);
 
         }
         public override XmlElement Serialize(XmlDocument doc)

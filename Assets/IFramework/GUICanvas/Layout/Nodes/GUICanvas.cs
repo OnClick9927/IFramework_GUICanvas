@@ -29,7 +29,7 @@ namespace IFramework.GUITool.LayoutDesign
  
         protected override void OnGUI_Self()
         {
-            GUILayout.BeginArea(position, image, imageStyle);
+            GUILayout.BeginArea(position, image, style);
            OnGUI_Children();
             GUILayout.EndArea();
 

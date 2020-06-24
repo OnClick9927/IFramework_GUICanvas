@@ -309,13 +309,13 @@ namespace IFramework.GUITool.RectDesign
             }
         }
 
-        private GUINode m_element;
+        private GUINode _node;
         public GUINode node
         {
-            get { return m_element; }
+            get { return _node; }
             set
             {
-                this.m_element = value;
+                this._node = value;
                 if (value.GetType() != typeof(GUICanvas))
                     calculatorDesign = new RectCalculatorEditor(value.calculator);
             }
@@ -325,11 +325,11 @@ namespace IFramework.GUITool.RectDesign
 
         public virtual void OnInspectorGUI()
         {
+            insFold = FormatInspectorHeadGUI(insFold, "Node:" + node.GetType().Name, HeadGUI, ContentGUI);
             if (calculatorDesign != null)
             {
                 calculatorDesign.OnInspectorGUI();
             }
-            insFold = FormatInspectorHeadGUI(insFold, "Element:" + node.GetType().Name, HeadGUI, ContentGUI);
         }
         private void ContentGUI()
         {
@@ -349,10 +349,22 @@ namespace IFramework.GUITool.RectDesign
         private bool HeadGUI(bool bo, string title)
         {
             this.BeginHorizontal()
-                    .Foldout(ref bo, title, true)
-                    .Pan(() => { node.active = EditorGUILayout.Toggle(node.active, GUILayout.Width(18)); })
-                    .Button(() => { node.Reset(); }, EditorGUIUtility.IconContent("d_TreeEditor.Refresh"), GUILayout.Width(25))
+                .Pan(() => {
+                    GUILayout.Label(title, new GUIStyle("SettingsHeader"));
+                    Rect rect = GUILayoutUtility.GetLastRect();
+                    if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition) && Event.current.clickCount == 1)
+                    {
+                        bo = !bo;
+                        Event.current.Use();
+                    }
+                    node.active = EditorGUILayout.Toggle(node.active, GUILayout.Width(18));
+                })
+                .Button(() => { node.Reset(); }, EditorGUIUtility.IconContent("d_TreeEditor.Refresh"), GUILayout.Width(25))
                 .EndHorizontal();
+            if (bo)
+            {
+                GUILayout.Label("", new GUIStyle("IN Title"));
+            }
             return bo;
         }
 
@@ -444,7 +456,21 @@ namespace IFramework.GUITool.RectDesign
         {
             VerticalView(() => {
                 if (titledraw == null)
-                    fold = EditorGUILayout.Foldout(fold, title, true);
+                {
+                    //fold = EditorGUILayout.Foldout(fold, title, true, new GUIStyle("LargeBoldLabel"));
+                    GUILayout.Label(title, new GUIStyle("SettingsHeader"));
+                    Rect rect = GUILayoutUtility.GetLastRect();
+                    if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition) && Event.current.clickCount == 1)
+                    {
+                        fold = !fold;
+                        Event.current.Use();
+                    }
+                    if (fold)
+                    {
+                        GUILayout.Label("", new GUIStyle("IN Title"));
+                    }
+                }
+
                 else
                     fold = titledraw(fold, title);
                 HorizontalView(() => {

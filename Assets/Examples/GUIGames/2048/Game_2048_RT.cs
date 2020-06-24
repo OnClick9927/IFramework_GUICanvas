@@ -16,7 +16,7 @@ namespace IFramework_Demo.GUIGames
 	public class Game_2048_RT:MonoBehaviour
 	{
         GUICanvasComponet comp { get { return GetComponent<GUICanvasComponet>(); } }
-        GUICanvas guiCanvas { get { return comp.guiCanvas; } }
+        GUICanvas guiCanvas { get { return comp.canvas; } }
         private int[,] arr = new int[4, 4];
         private int Score = 0;
 

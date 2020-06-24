@@ -278,7 +278,7 @@ namespace IFramework
             var ws = EditorWindowUtil.Windows.FindAll((w) => { return w.searchName.ToLower().Contains(search); }).ToArray();
             table.Calc(new Rect(Vector2.zero, position.size), new Vector2(0, LineHeight), scroll, LineHeight, ws.Length, setting);
 
-            this.LabelField(table.titleRow.position, "", new GUIStyle(TitleStyle))
+            this.LabelField(table.titleRow.position, "", GUIStyles.Get(TitleStyle))
                 .LabelField(table.titleRow[Create].localPostion, Create)
                 .LabelField(table.titleRow[Name].localPostion, Name)
                 .LabelField(table.titleRow[Find].localPostion, Find)

@@ -241,26 +241,26 @@ namespace IFramework.GUITool.LayoutDesign
         public Action<bool> onActiveChange { get; set; }
         public Action<bool> onEnableChange { get; set; }
 
-        private string m_name;
-        private bool m_enable;
-        private bool m_active;
-        public string name { get { return m_name; } set { m_name = value; } }
+        private string _name;
+        private bool _enable;
+        private bool _active;
+        public string name { get { return _name; } set { _name = value; } }
         public bool active
         {
-            get { return m_active; }
+            get { return _active; }
             set
             {
-                m_active = value;
+                _active = value;
                 if (onActiveChange != null)
                     onActiveChange(value);
             }
         }
         public bool enable
         {
-            get { return m_enable; }
+            get { return _enable; }
             set
             {
-                m_enable = value;
+                _enable = value;
                 if (onEnableChange != null)
                     onEnableChange(value);
             }
@@ -292,7 +292,7 @@ namespace IFramework.GUITool.LayoutDesign
                 return parent.depth + 1;
             }
         }
-        private GUINode m_parent;
+        private GUINode _parent;
         public GUINode root
         {
             get
@@ -319,14 +319,14 @@ namespace IFramework.GUITool.LayoutDesign
         }
         public GUINode parent
         {
-            get { return m_parent; }
+            get { return _parent; }
             set
             {
-                if (m_parent == value) return;
-                if (m_parent != null)
-                    m_parent.Children.Remove(this);
+                if (_parent == value) return;
+                if (_parent != null)
+                    _parent.children.Remove(this);
                 if (value == null)
-                    m_parent = value;
+                    _parent = value;
                 else
                 {
                     if (!value.GetType().IsSubclassOf(typeof(ParentGUINode)))
@@ -334,8 +334,8 @@ namespace IFramework.GUITool.LayoutDesign
                         Log.E(value.name + " can't HaveChild");
                         return;
                     }
-                    m_parent = value;
-                    m_parent.Children.Add(this);
+                    _parent = value;
+                    _parent.children.Add(this);
                 }
 
             }
@@ -345,31 +345,31 @@ namespace IFramework.GUITool.LayoutDesign
             get
             {
                 if (parent == null) return -1;
-                for (int i = 0; i < parent.Children.Count; i++)
-                    if (parent.Children[i] == this)
+                for (int i = 0; i < parent.children.Count; i++)
+                    if (parent.children[i] == this)
                         return i;
                 return -1;
             }
             set
             {
                 GUINode ele = this.parent as GUINode;
-                ele.Children.Remove(this);
-                ele.Children.Insert(value, this);
+                ele.children.Remove(this);
+                ele.children.Insert(value, this);
                 GUICanvas canvas = ele.root as GUICanvas;
                 if (canvas != null)
                     canvas.TreeChange();
             }
         }
-        public List<GUINode> Children { get { return children; } }
-        protected readonly List<GUINode> children = new List<GUINode>();
+        public List<GUINode> children { get { return _children; } }
+        protected readonly List<GUINode> _children = new List<GUINode>();
 
 
         protected GUINode() { Reset(); }
         protected GUINode(GUINode other)
         {
-            m_name = other.m_name;
-            m_enable = other.m_enable;
-            m_active = other.m_active;
+            _name = other._name;
+            _enable = other._enable;
+            _active = other._active;
             rotateAngle = other.rotateAngle;
             rotateOffset = other.rotateOffset;
             color = other.color;
@@ -388,8 +388,8 @@ namespace IFramework.GUITool.LayoutDesign
         }
         public virtual void Reset()
         {
-            m_name = GetType().Name;
-            m_enable = m_active = true;
+            _name = GetType().Name;
+            _enable = _active = true;
             color = contentColor = backgroundColor = Color.white;
             rotateAngle = 0;
             rotateOffset = Vector2.zero;
@@ -411,12 +411,12 @@ namespace IFramework.GUITool.LayoutDesign
 
         public GUINode Find(string path)
         {
-            if (children.Count == 0) return null;
+            if (_children.Count == 0) return null;
             if (!path.Contains("/"))
             {
-                for (int i = 0; i < children.Count; i++)
+                for (int i = 0; i < _children.Count; i++)
                 {
-                    GUINode tmp = children[i] as GUINode;
+                    GUINode tmp = _children[i] as GUINode;
                     if (tmp.name == path)
                         return tmp;
                 }
@@ -427,9 +427,9 @@ namespace IFramework.GUITool.LayoutDesign
                 int index = path.IndexOf("/");
                 string tmp = path.Substring(0, index);
                 path = path.Substring(index + 1);
-                for (int i = 0; i < children.Count; i++)
+                for (int i = 0; i < _children.Count; i++)
                 {
-                    GUINode tmpE = children[i] as GUINode;
+                    GUINode tmpE = _children[i] as GUINode;
                     if (tmpE.name == tmp)
                         return tmpE.Find(path);
                 }
@@ -443,20 +443,20 @@ namespace IFramework.GUITool.LayoutDesign
         }
 
 
-        private Color preContentColor;
-        private Color preBgColor;
-        private Color preColor;
-        private GUISkin preSkin;
-        private Matrix4x4 preMat4x4;
-        private bool preEnable;
+        private Color _preContentColor;
+        private Color _preBgColor;
+        private Color _preColor;
+        private GUISkin _preSkin;
+        private Matrix4x4 _preMat4x4;
+        private bool _preEnable;
         private void BeginGUI()
         {
-            preSkin = GUI.skin;
-            preContentColor = GUI.contentColor;
-            preBgColor = GUI.backgroundColor;
-            preColor = GUI.color;
-            preMat4x4 = GUI.matrix;
-            preEnable = GUI.enabled;
+            _preSkin = GUI.skin;
+            _preContentColor = GUI.contentColor;
+            _preBgColor = GUI.backgroundColor;
+            _preColor = GUI.color;
+            _preMat4x4 = GUI.matrix;
+            _preEnable = GUI.enabled;
 
             GUI.color = color;
             GUI.backgroundColor = backgroundColor;
@@ -479,12 +479,12 @@ namespace IFramework.GUITool.LayoutDesign
         }
         private void EndGUI()
         {
-            GUI.backgroundColor = preBgColor;
-            GUI.contentColor = preContentColor;
-            GUI.skin = preSkin;
-            GUI.matrix = preMat4x4;
-            GUI.color = preColor;
-            GUI.enabled = preEnable;
+            GUI.backgroundColor = _preBgColor;
+            GUI.contentColor = _preContentColor;
+            GUI.skin = _preSkin;
+            GUI.matrix = _preMat4x4;
+            GUI.color = _preColor;
+            GUI.enabled = _preEnable;
         }
 
         protected GUILayoutOption[] CalcGUILayOutOptions()
@@ -548,14 +548,14 @@ namespace IFramework.GUITool.LayoutDesign
         }
         public virtual void DeSerialize(XmlElement root)
         {
-            DeSerializeField(root, "name", ref m_name);
+            DeSerializeField(root, "name", ref _name);
             DeSerializeField(root, "rotateAngle", ref rotateAngle);
             DeSerializeField(root, "rotateOffset", ref rotateOffset);
             DeSerializeField(root, "color", ref color);
             DeSerializeField(root, "contentColor", ref contentColor);
             DeSerializeField(root, "backgroundColor", ref backgroundColor);
-            DeSerializeField(root, "active", ref m_active);
-            DeSerializeField(root, "enable", ref m_enable);
+            DeSerializeField(root, "active", ref _active);
+            DeSerializeField(root, "enable", ref _enable);
             DeSerializeField(root, "enableMinSize", ref enableMinSize);
             DeSerializeField(root, "enableSize", ref enableSize);
             DeSerializeField(root, "enableMaxSize", ref enableMaxSize);

@@ -22,7 +22,7 @@ namespace IFramework.GUITool.RectDesign
             base.OnInspectorGUI();
             if (imageStyleDrawer == null)
                 imageStyleDrawer = new GUIStyleEditor(image.imageStyle, "Image Style");
-            insFold = FormatInspectorHeadGUI(insFold, "Image Element", null, ContentGUI);
+            insFold = FormatInspectorHeadGUI(insFold, "Image ", null, ContentGUI);
         }
         private void ContentGUI()
         {

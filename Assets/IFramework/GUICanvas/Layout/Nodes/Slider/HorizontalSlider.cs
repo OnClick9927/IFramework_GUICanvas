@@ -17,25 +17,25 @@ namespace IFramework.GUITool.LayoutDesign
         {
             get
             {
-                if (m_slider == null)
+                if (_slider == null)
                 {
-                    m_slider = new GUIStyle(GUI.skin.horizontalSlider);
+                    _slider = new GUIStyle(GUI.skin.horizontalSlider);
                 }
-                return m_slider;
+                return _slider;
             }
-            set { m_slider = new GUIStyle(value); }
+            set { _slider = new GUIStyle(value); }
         }
         public override GUIStyle thumb
         {
             get
             {
-                if (m_thumb == null)
+                if (_thumb == null)
                 {
-                    m_thumb = new GUIStyle(GUI.skin.horizontalSliderThumb);
+                    _thumb = new GUIStyle(GUI.skin.horizontalSliderThumb);
                 }
-                return m_thumb;
+                return _thumb;
             }
-            set { m_thumb = new GUIStyle(value); }
+            set { _thumb = new GUIStyle(value); }
         }
 
         public HorizontalSlider() : base() { }

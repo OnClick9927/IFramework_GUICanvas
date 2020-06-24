@@ -16,22 +16,22 @@ namespace IFramework.GUITool.LayoutDesign
     {
         public Action<string> onValueChange { get; set; }
 
-        public override GUIStyle textStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.textField);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.textField);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
         public TextField() : base() { }
         public TextField(TextNode other) : base(other) { }
         protected override void OnGUI_Self()
         {
             base.OnGUI_Self();
-            string tmp = GUILayout.TextField(text, textStyle, CalcGUILayOutOptions());
+            string tmp = GUILayout.TextField(text, style, CalcGUILayOutOptions());
             position = GUILayoutUtility.GetLastRect();
             if (tmp != text)
             {

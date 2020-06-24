@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace IFramework.GUITool.LayoutDesign
 {
-    [GUINode("TextToolBar/ToolBar")]
+    [GUINode("ToolBar/TextToolBar")]
     public class TextToolBar : ToolBarNode
     {
         public string[] texs;

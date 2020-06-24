@@ -15,15 +15,15 @@ namespace IFramework.GUITool.LayoutDesign
     public class TextArea : TextNode
     {
         public Action<string> onValueChange { get; set; }
-        public override GUIStyle textStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.textArea);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.textArea);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         public TextArea() : base() { }
@@ -32,7 +32,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
             base.OnGUI_Self();
-            string tmp = GUILayout.TextArea(text, textStyle, CalcGUILayOutOptions());
+            string tmp = GUILayout.TextArea(text, style, CalcGUILayOutOptions());
             position = GUILayoutUtility.GetLastRect();
             if (tmp != text)
             {

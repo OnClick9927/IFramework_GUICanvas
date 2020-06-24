@@ -49,7 +49,7 @@ namespace IFramework.GUITool.LayoutDesign
             GUI.Button(ele.position, "", ele.btnStyle);
             if (ele.image != null)
                 GUI.DrawTexture(ele.position, ele.image, ele.mode, ele.alphaBlend, ele.imageAspect, ele.color, ele.borderWidths, ele.borderRadius);
-            GUI.Label(ele.position, new GUIContent(ele.text, ele.tooltip), ele.textStyle);
+            GUI.Label(ele.position, new GUIContent(ele.text, ele.tooltip), ele.style);
             EndGUI();
         }
 

@@ -19,8 +19,8 @@ namespace IFramework.GUITool.LayoutDesign
         {
             base.OnInspectorGUI();
             if (imageStyleDrawer == null)
-                imageStyleDrawer = new GUIStyleDesign(image.imageStyle, "Image Style");
-            insFold = FormatFoldGUI(insFold, "Image Element", null, ContentGUI);
+                imageStyleDrawer = new GUIStyleDesign(image.style, "Image Style");
+            insFold = FormatFoldGUI(insFold, "Image", null, ContentGUI);
         }
         private void ContentGUI()
         {

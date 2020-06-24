@@ -19,7 +19,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!ele.active) return;
             BeginGUI();
-            GUILayout.BeginVertical(ele.image, ele.imageStyle, CalcGUILayOutOptions());
+            GUILayout.BeginVertical(ele.image, ele.style, CalcGUILayOutOptions());
             if (child != null) child();
 
             GUILayout.EndVertical();

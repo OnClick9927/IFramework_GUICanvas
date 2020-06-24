@@ -19,7 +19,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!image.active) return;
             BeginGUI();
-            GUILayout.Box(image.image, image.imageStyle, CalcGUILayOutOptions());
+            GUILayout.Box(image.image, image.style, CalcGUILayOutOptions());
             image.position = GUILayoutUtility.GetLastRect();
             EndGUI();
         }

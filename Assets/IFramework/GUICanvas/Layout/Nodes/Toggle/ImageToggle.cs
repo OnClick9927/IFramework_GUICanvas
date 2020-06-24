@@ -17,15 +17,15 @@ namespace IFramework.GUITool.LayoutDesign
     {
         public bool value;
         public Action<bool> onValueChange { get; set; }
-        public override GUIStyle imageStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.toggle);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.toggle);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         public ImageToggle() : base() { }
@@ -53,7 +53,7 @@ namespace IFramework.GUITool.LayoutDesign
 
         protected virtual bool DrawGUI()
         {
-            return GUILayout.Toggle(value, image, imageStyle, CalcGUILayOutOptions());
+            return GUILayout.Toggle(value, image, style, CalcGUILayOutOptions());
         }
 
         public override XmlElement Serialize(XmlDocument doc)

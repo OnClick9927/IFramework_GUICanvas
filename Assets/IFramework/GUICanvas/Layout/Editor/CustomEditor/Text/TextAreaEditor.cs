@@ -24,7 +24,7 @@ namespace IFramework.GUITool.LayoutDesign
             if (!node.active) return;
 
             BeginGUI();
-            textElement.text = GUILayout.TextArea(textElement.text, textElement.textStyle, CalcGUILayOutOptions());
+            textElement.text = GUILayout.TextArea(textElement.text, textElement.style, CalcGUILayOutOptions());
             textElement.position = GUILayoutUtility.GetLastRect();
             EndGUI();
         }

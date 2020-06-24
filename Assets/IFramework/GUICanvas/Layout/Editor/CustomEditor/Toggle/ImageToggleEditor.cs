@@ -29,7 +29,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!toggle.active) return;
             BeginGUI();
-            toggle.value = GUILayout.Toggle(toggle.value, toggle.image, toggle.imageStyle, CalcGUILayOutOptions());
+            toggle.value = GUILayout.Toggle(toggle.value, toggle.image, toggle.style, CalcGUILayOutOptions());
             toggle.position = GUILayoutUtility.GetLastRect();
             EndGUI();
         }

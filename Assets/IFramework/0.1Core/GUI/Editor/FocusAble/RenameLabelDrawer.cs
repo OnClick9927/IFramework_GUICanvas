@@ -21,30 +21,30 @@ namespace IFramework.GUITool
             onValueChange = null;
             onEndEdit = null;
         }
-        private int clickCount = 0;
+        private int _clickCount = 0;
+        private System.DateTime _lastTime;
 
         public event Action<string> onValueChange;
         public event Action<string> onEndEdit;
-
         public string value;
 
-        public bool HaveClicked { get { return clickCount > 0; } }
-        public bool IsEditing { get { return focused && clickCount == 2; } }
+        public bool clicked { get { return _clickCount > 0; } }
+        public bool editing { get { return focused && _clickCount == 2; } }
 
         protected override void OnLostFous()
         {
-            clickCount = 0;
+            _clickCount = 0;
         }
         protected override void OnFocusOther()
         {
-            clickCount = 0;
+            _clickCount = 0;
         }
 
         public override void OnGUI(Rect position)
         {
             base.OnGUI(position);
             Event e = Event.current;
-            if (IsEditing)
+            if (editing)
             {
                 GUI.SetNextControlName(focusID);
                 string tmp = value;
@@ -67,8 +67,22 @@ namespace IFramework.GUITool
                 {
                     if (e.type == EventType.MouseDown && e.clickCount == 1)
                     {
-                        if (clickCount<2) clickCount++;
-                        if (clickCount==2)
+                        if (_clickCount < 2)
+                        {
+                            if (_clickCount==0)
+                            {
+                                _clickCount++;
+                                _lastTime = System.DateTime.Now;
+                            }
+                            else if(_clickCount==1)
+                            {
+                                if ((System.DateTime.Now-_lastTime).TotalSeconds>0.2)
+                                {
+                                    _clickCount++;
+                                }
+                            }
+                        }
+                        if (_clickCount==2)
                         {
                             GUIFocusControl.Focus(this);
                             if (e.type != EventType.Repaint && e.type != EventType.Layout)
@@ -77,7 +91,7 @@ namespace IFramework.GUITool
                     }
                     if (e.keyCode == KeyCode.F2)
                     {
-                        clickCount = 2;
+                        _clickCount = 2;
                         GUIFocusControl.Focus(this);
                         if (e.type != EventType.Repaint && e.type != EventType.Layout)
                             Event.current.Use();
@@ -86,9 +100,15 @@ namespace IFramework.GUITool
             }
             else
             {
+                if (e.type== EventType.MouseDrag && _clickCount>0)
+                {
+                    _clickCount = 0;
+                    GUIFocusControl.Diffuse(this);
+                    if (onEndEdit != null) onEndEdit(value);
+                }
                 if (e.type == EventType.MouseDown && e.clickCount == 1)
                 {
-                    clickCount = 0;
+                    _clickCount = 0;
                     GUIFocusControl.Diffuse(this);
                     if (onEndEdit != null) onEndEdit(value);
                 }
@@ -104,12 +124,12 @@ namespace IFramework.GUITool
         public override void Focus()
         {
             base.Focus();
-            clickCount = 2;
+            _clickCount = 2;
         }
         public override void Difuse()
         {
             base.Difuse();
-            clickCount = 0;
+            _clickCount = 0;
         }
     }
 }

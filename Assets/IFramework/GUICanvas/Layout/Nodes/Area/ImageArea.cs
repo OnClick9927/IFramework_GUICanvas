@@ -16,15 +16,15 @@ namespace IFramework.GUITool.LayoutDesign
     [GUINode("Area/ImageArea")]
     public class ImageArea : ParentImageNode
     {
-        public override GUIStyle imageStyle
+        public override GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.label);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.label);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
         public Rect areaRect;
         public override Rect position { get { return areaRect; } set { areaRect = value; } }
@@ -43,7 +43,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
 
-            GUILayout.BeginArea(areaRect, image, imageStyle);
+            GUILayout.BeginArea(areaRect, image, style);
             OnGUI_Children();
             GUILayout.EndArea();
 

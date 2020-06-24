@@ -32,7 +32,7 @@ namespace IFramework.GUITool.LayoutDesign
         }
         protected override void OnGUI_Self()
         {
-            GUILayout.Box(new GUIContent(text, image, tooltip), imageStyle, CalcGUILayOutOptions());
+            GUILayout.Box(new GUIContent(text, image, tooltip), style, CalcGUILayOutOptions());
             position = GUILayoutUtility.GetLastRect();
 
         }

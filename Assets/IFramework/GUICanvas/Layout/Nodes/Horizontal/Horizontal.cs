@@ -33,7 +33,7 @@ namespace IFramework.GUITool.LayoutDesign
 
         protected override void OnGUI_Self()
         {
-            GUILayout.BeginHorizontal(new GUIContent(text, image, tooltip), imageStyle, CalcGUILayOutOptions());
+            GUILayout.BeginHorizontal(new GUIContent(text, image, tooltip), style, CalcGUILayOutOptions());
             OnGUI_Children();
             GUILayout.EndHorizontal();
 

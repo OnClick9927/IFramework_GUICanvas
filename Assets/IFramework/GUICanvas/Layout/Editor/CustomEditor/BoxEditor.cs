@@ -30,7 +30,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             if (!ele.active) return;
             BeginGUI();
-            GUILayout.Box(new GUIContent(ele.text, ele.image, ele.tooltip), ele.imageStyle, CalcGUILayOutOptions());
+            GUILayout.Box(new GUIContent(ele.text, ele.image, ele.tooltip), ele.style, CalcGUILayOutOptions());
             ele.position = GUILayoutUtility.GetLastRect();
             EndGUI();
         }

@@ -14,23 +14,23 @@ namespace IFramework.GUITool.LayoutDesign
     public abstract class ImageNode : GUINode
     {
         public Texture2D image;
-        protected GUIStyle m_style;
-        public virtual GUIStyle imageStyle
+        protected GUIStyle _style;
+        public virtual GUIStyle style
         {
             get
             {
-                if (m_style == null)
-                    m_style = new GUIStyle(GUI.skin.box);
-                return m_style;
+                if (_style == null)
+                    _style = new GUIStyle(GUI.skin.box);
+                return _style;
             }
-            set { m_style = new GUIStyle(value); }
+            set { _style = new GUIStyle(value); }
         }
 
         protected ImageNode() : base() { }
         protected ImageNode(ImageNode other) : base(other)
         {
             image = other.image;
-            m_style = new GUIStyle(other.m_style);
+            _style = new GUIStyle(other._style);
         }
         public override void Reset()
         {
@@ -42,7 +42,7 @@ namespace IFramework.GUITool.LayoutDesign
         {
             XmlElement root = base.Serialize(doc);
 
-            root.AppendChild(new GUIStyleSerializer(imageStyle, "Image Style").Serializate(doc));
+            root.AppendChild(new GUIStyleSerializer(style, "Image Style").Serializate(doc));
             if (image != null)
                 SerializeField(root, "image", image.CreateReadableTexture().EncodeToPNG());
 
@@ -60,9 +60,9 @@ namespace IFramework.GUITool.LayoutDesign
                 image.hideFlags = HideFlags.DontSaveInEditor;
             }
             XmlElement styleE = root.SelectSingleNode("GUIStyle") as XmlElement;
-            m_style = new GUIStyle();
+            _style = new GUIStyle();
 
-            new GUIStyleSerializer(imageStyle, "Image Style").DeSerializate(styleE);
+            new GUIStyleSerializer(style, "Image Style").DeSerializate(styleE);
         }
     }
 

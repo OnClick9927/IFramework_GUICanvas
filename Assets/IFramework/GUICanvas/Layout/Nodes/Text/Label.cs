@@ -19,7 +19,7 @@ namespace IFramework.GUITool.LayoutDesign
         protected override void OnGUI_Self()
         {
             base.OnGUI_Self();
-            GUILayout.Label(new GUIContent(text, tooltip), textStyle, CalcGUILayOutOptions());
+            GUILayout.Label(new GUIContent(text, tooltip), style, CalcGUILayOutOptions());
             position = GUILayoutUtility.GetLastRect();
 
         }

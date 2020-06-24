@@ -16,9 +16,9 @@ namespace IFramework.GUITool
     {
         private class Styles
         {
-            public static GUIStyle ToolBar = new GUIStyle("ToolBar");
-            public static GUIStyle toolbarbutton =new GUIStyle("toolbarbutton");
-            public static GUIStyle Tooltip = new GUIStyle("Tooltip");
+            public static GUIStyle ToolBar = GUIStyles.Get("ToolBar");
+            public static GUIStyle toolbarbutton =GUIStyles.Get("toolbarbutton");
+            public static GUIStyle Tooltip = GUIStyles.Get("Tooltip");
             public static GUIStyle DropDown = ("ToolbarDropDown");
         }
         public abstract class ToolbarNode:ILayoutGUIDrawer
