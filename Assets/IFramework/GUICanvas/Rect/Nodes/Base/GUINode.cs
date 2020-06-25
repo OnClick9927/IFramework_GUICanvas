@@ -324,13 +324,13 @@ namespace IFramework.GUITool.RectDesign
             {
                 if (m_parent == value) return;
                 if (m_parent != null)
-                    m_parent.Children.Remove(this);
+                    m_parent.children.Remove(this);
                 if (value == null)
                     m_parent = value;
                 else
                 {
                     m_parent = value;
-                    m_parent.Children.Add(this);
+                    m_parent.children.Add(this);
                 }
 
             }
@@ -340,24 +340,24 @@ namespace IFramework.GUITool.RectDesign
             get
             {
                 if (parent == null) return -1;
-                for (int i = 0; i < parent.Children.Count; i++)
-                    if (parent.Children[i] == this)
+                for (int i = 0; i < parent.children.Count; i++)
+                    if (parent.children[i] == this)
                         return i;
                 return -1;
             }
             set
             {
                 GUINode ele = this.parent as GUINode;
-                ele.Children.Remove(this);
-                ele.Children.Insert(value, this);
+                ele.children.Remove(this);
+                ele.children.Insert(value, this);
                 GUICanvas canvas = ele.root as GUICanvas;
                 if (canvas != null)
                     canvas.TreeChange();
             }
         }
 
-        public List<GUINode> Children { get { return children; } }
-        protected readonly List<GUINode> children = new List<GUINode>();
+        public List<GUINode> children { get { return _children; } }
+        protected readonly List<GUINode> _children = new List<GUINode>();
         public RectCalculator calculator;
 
         protected GUINode() { calculator = new RectCalculator(); Reset(); }

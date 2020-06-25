@@ -14,6 +14,34 @@ using UnityEditor;
 using UnityEngine;
 namespace IFramework.GUITool.LayoutDesign
 {
+    interface IGameTestScript
+    {
+        GUICanvas canvas { get; set; }
+        void Update();
+        void Awake();
+        void Destory();
+    }
+    class GG : IGameTestScript
+    {
+        public GUICanvas canvas { get; set; }
+
+        public void Awake()
+        {
+            Debug.Log("awake");
+        }
+
+        public void Destory()
+        {
+            Debug.Log("Destory");
+
+        }
+
+        public void Update()
+        {
+            Debug.Log("Update");
+
+        }
+    }
     static class GUINodeEditors
     {
         public static List<Type> editorTypes = typeof(GUINodeEditor).GetSubTypesInAssemblys().ToList();
@@ -100,7 +128,7 @@ namespace IFramework.GUITool.LayoutDesign
 
         private enum EditType
         {
-            Design = 0, Result = 1
+            Design = 0, Result = 1,Game=2
         }
 
         public GUICanvas canvas;
@@ -114,6 +142,12 @@ namespace IFramework.GUITool.LayoutDesign
             GUIScaleUtility.CheckInit();
 
             var designs = GUINodeEditors.editorTypes.FindAll((t) => { return t.IsDefined(typeof(CustomGUINodeAttribute), false); });
+
+            _scriptTypes = typeof(IGameTestScript).GetSubTypesInAssemblys()
+                                    .Where((type) => { return !type.IsAbstract; })
+                                    .Select((type) => { return type; })
+                                    .ToDictionary((type) => { return type.FullName; });
+
             var eles = GUINodes.nodeTypes;
             foreach (var type in eles)
             {
@@ -145,6 +179,7 @@ namespace IFramework.GUITool.LayoutDesign
             .Button(new GUIContent("Setting"), (Rect rect) => {
                 PopupWindow.Show(rect, new CanvasSetting() { window = this });
             }, 50);
+             _playing = false;
         }
 
 
@@ -202,40 +237,6 @@ namespace IFramework.GUITool.LayoutDesign
             Handles.color = handleColor;
         }
 
-        public override void OnGUI(Rect rect)
-        {
-            var rs = rect.HorizontalSplit(ToolBarHeight, 1);
-            Rect graphRect = new Rect(new Vector2(5, ToolBarHeight * 1.2f), rs[1].size);
-            var center = graphRect.size / 2f;
-            _zoomAdjustment = GUIScaleUtility.BeginScale(ref graphRect, center, ZoomScale, false);
-            graphRect.position = GraphToScreenSpace(canvas.position.position);
-            DrawAxes(graphRect, Color.grey, 10);
-            GUI.BeginClip(graphRect);
-            switch (_editType)
-            {
-                case EditType.Design:
-                    EleGUI(canvas);
-                    break;
-                case EditType.Result:
-                    canvas.OnGUI();
-                    break;
-            }
-            GUI.EndClip();
-            GUIScaleUtility.EndScale();
-
-            Event e = Event.current;
-            HandleDragOther(rs[1]);
-            if (e.type == EventType.ScrollWheel && rs[1].Contains(e.mousePosition))
-            {
-                Zoom(e.delta.y);
-            }
-            if (e.type == EventType.MouseDrag && !_isDragOtherWindow)
-            {
-                Pan(e.delta);
-            }
-           
-            _toolbar.OnGUI(rs[0].Zoom(AnchorType.LowerCenter, new Vector2(8, 2)).MoveUp(2));
-        }
         public void EleGUI(GUINode ele)
         {
             GUINodeEditor des = _dic[ele.GetType()];
@@ -248,6 +249,441 @@ namespace IFramework.GUITool.LayoutDesign
             });
 
         }
+        public override void OnGUI(Rect rect)
+        {
+            var rs = rect.HorizontalSplit(ToolBarHeight, 1);
+
+            if (_editType!= EditType.Game)
+            {
+                Rect graphRect = new Rect(new Vector2(5, ToolBarHeight * 1.2f), rs[1].size);
+                var center = graphRect.size / 2f;
+                _zoomAdjustment = GUIScaleUtility.BeginScale(ref graphRect, center, ZoomScale, false);
+                graphRect.position = GraphToScreenSpace(canvas.position.position);
+                DrawAxes(graphRect, Color.grey, 10);
+                GUI.BeginClip(graphRect);
+                switch (_editType)
+                {
+                    case EditType.Design:
+                        EleGUI(canvas);
+                        break;
+                    case EditType.Result:
+                        canvas.OnGUI();
+                        break;
+                }
+                GUI.EndClip();
+                GUIScaleUtility.EndScale();
+
+                Event e = Event.current;
+                HandleDragOther(rs[1]);
+                if (e.type == EventType.ScrollWheel && rs[1].Contains(e.mousePosition))
+                {
+                    Zoom(e.delta.y);
+                }
+                if (e.type == EventType.MouseDrag && !_isDragOtherWindow)
+                {
+                    Pan(e.delta);
+                }
+            }
+            else
+            {
+                var rs1 = new Rect(new Vector2(5, ToolBarHeight * 1.2f), rs[1].size - Vector2.one * 10)
+                   .HorizontalSplit(ToolBarHeight, 1);
+
+                Rect graphRect = rs1[1];
+                graphRect.DrawOutLine(100, Color.black);
+
+                var center = graphRect.size / 2f;
+
+                float xscale = canvas.position.width / graphRect.width;
+                float yscale = canvas.position.height / graphRect.height;
+                float scale = xscale < yscale ? yscale : xscale;
+
+                GUIScaleUtility.BeginScale(ref graphRect, center, scale, false);
+
+                GUI.BeginClip(graphRect);
+                canvas.OnGUI();
+                GUI.EndClip();
+                GUIScaleUtility.EndScale();
+
+                GUILayout.BeginArea(rs1[0]);
+                {
+                    GUILayout.BeginHorizontal();
+                    _playing = GUILayout.Toggle(_playing, "Play", GUIStyles.Get("toolbarbutton"),GUILayout.Width(40));
+                    GUILayout.Label(new GUIContent(string.IsNullOrEmpty(_name)?"No Script": "Script", "ScriptType:"+_name));
+                    Rect pos = GUILayoutUtility.GetLastRect();
+
+                    if (!string.IsNullOrEmpty(_name))
+                    {
+                        if (GUILayout.Button(new GUIContent(EditorGUIUtility.IconContent("Refresh").image,"Clear ScriptType")))
+                        {
+                            _name = "";
+                        }
+                    }
+
+                    if (_hashID == 0) _hashID = "ScriptType".GetHashCode();
+                    int ctrlId = GUIUtility.GetControlID(_hashID, FocusType.Keyboard, pos);
+                    {
+                        if (DropdownButton(ctrlId, pos, new GUIContent(string.Format(""))))
+                        {
+                            int index = -1;
+                            for (int i = 0; i < _names.Length; i++)
+                            {
+                                if (_names[i] == _name)
+                                {
+                                    index = i; break; 
+                                }
+                            }
+                            SearchablePopup.Show(pos, _names, index, (i, str) =>
+                            {
+                                _name = str;
+                            });
+                        }
+
+                    }
+                    GUILayout.FlexibleSpace();
+                    GUILayout.Label(new GUIContent((1 / scale).ToString(), "Canvas Scale:" + 1 / scale));
+                    GUILayout.EndHorizontal();
+                }
+                GUILayout.EndArea();
+                if (_script != null)
+                {
+                    _script.Update();
+                }
+
+            }
+            _toolbar.OnGUI(rs[0].Zoom(AnchorType.LowerCenter, new Vector2(8, 2)).MoveUp(2));
+        }
+
+
+        [SerializeField] private int _hashID;
+
+        private string _name;
+        private string[] _names { get { return _scriptTypes.Keys.ToArray(); } }
+        private Dictionary<string, Type> _scriptTypes;
+        private IGameTestScript _script;
+        private bool __playing;
+        private bool _playing { get { return __playing; } set {
+                if (__playing!=value)
+                {
+                    __playing = value;
+                    if (value)
+                    {
+                        if (string.IsNullOrEmpty(_name))
+                        {
+                            EditorWindow.focusedWindow.ShowNotification(new GUIContent("Please Choose Script Type"));
+                            __playing = false;
+                            return;
+                        }
+                        _script= Activator.CreateInstance(_scriptTypes[_name]) as IGameTestScript;
+                        _script.canvas = canvas;
+                        _script.Awake();
+                    }
+                    else
+                    {
+                        if (_script!=null) 
+                        {
+                            _script.Destory();
+                            _script = null;
+                        }
+                    }
+                }
+            }
+        }
+        private bool DropdownButton(int id, Rect position, GUIContent content)
+        {
+            Event e = Event.current;
+            switch (e.type)
+            {
+                case EventType.MouseDown:
+                    if (position.Contains(e.mousePosition) && e.button == 0)
+                    {
+                        Event.current.Use();
+                        return true;
+                    }
+                    break;
+                case EventType.KeyDown:
+                    if (GUIUtility.keyboardControl == id && e.character == '\n')
+                    {
+                        Event.current.Use();
+                        return true;
+                    }
+                    break;
+                case EventType.Repaint:
+                    //Styles.BoldLabel.Draw(position, content, id, false);
+                    break;
+            }
+            return false;
+        }
+        private class SearchablePopup : PopupWindowContent
+        {
+            public class InnerSearchField : FocusAbleGUIDrawer
+            {
+                private class Styles
+                {
+                    public static GUIStyle SearchTextFieldStyle = GUIStyles.Get("ToolbarSeachTextField");
+                    public static GUIStyle SearchCancelButtonStyle = GUIStyles.Get("SearchCancelButton");
+                    public static GUIStyle SearchCancelButtonEmptyStyle = GUIStyles.Get("SearchCancelButtonEmpty");
+                }
+
+                public string OnGUI(Rect position, string value)
+                {
+                    GUIStyle cancelBtnStyle = string.IsNullOrEmpty(value) ? Styles.SearchCancelButtonEmptyStyle : Styles.SearchCancelButtonStyle;
+                    position.width -= cancelBtnStyle.fixedWidth;
+
+                    Styles.SearchTextFieldStyle.fixedHeight = position.height;
+                    cancelBtnStyle.fixedHeight = position.height;
+
+                    Styles.SearchTextFieldStyle.alignment = TextAnchor.MiddleLeft;
+                    while (Styles.SearchTextFieldStyle.lineHeight < position.height - 15)
+                    {
+                        Styles.SearchTextFieldStyle.fontSize++;
+                    }
+                    GUI.SetNextControlName(focusID);
+
+                    value = GUI.TextField(new Rect(position.x,
+                                                                     position.y + 1,
+                                                                     position.width,
+                                                                     position.height - 1),
+                                                                     value,
+                                                                     Styles.SearchTextFieldStyle);
+                    if (GUI.Button(new Rect(position.x + position.width,
+                                            position.y + 1,
+                                            cancelBtnStyle.fixedWidth,
+                                            cancelBtnStyle.fixedHeight
+                                            ),
+                                            GUIContent.none,
+                                            cancelBtnStyle))
+                    {
+                        value = string.Empty;
+                        GUI.changed = true;
+                        GUIUtility.keyboardControl = 0;
+                    }
+
+
+                    Event e = Event.current;
+                    if (position.Contains(e.mousePosition))
+                    {
+                        if (!focused)
+                            if ((e.type == EventType.MouseDown /*&& e.clickCount == 2*/) /*|| e.keyCode == KeyCode.F2*/)
+                            {
+                                focused = true;
+                                GUIFocusControl.Focus(this);
+                                if (e.type != EventType.Repaint && e.type != EventType.Layout)
+                                    Event.current.Use();
+                            }
+                    }
+                    //if ((/*e.keyCode == KeyCode.Return ||*/ e.keyCode == KeyCode.Escape || e.character == '\n'))
+                    //{
+                    //    GUIFocusControl.Focus(null, Focused);
+                    //    Focused = false;
+                    //    if (e.type != EventType.Repaint && e.type != EventType.Layout)
+                    //        Event.current.Use();
+                    //}
+                    return value;
+                }
+
+            }
+            private const float rowHeight = 16.0f;
+            private const float rowIndent = 8.0f;
+            public static void Show(Rect activatorRect, string[] options, int current, Action<int, string> onSelectionMade)
+            {
+                SearchablePopup win = new SearchablePopup(options, current, onSelectionMade);
+                PopupWindow.Show(activatorRect, win);
+            }
+            private static void Repaint() { EditorWindow.focusedWindow.Repaint(); }
+            private static void DrawBox(Rect rect, Color tint)
+            {
+                Color c = GUI.color;
+                GUI.color = tint;
+                GUI.Box(rect, "", Selection);
+                GUI.color = c;
+            }
+            private class FilteredList
+            {
+                public struct Entry
+                {
+                    public int Index;
+                    public string Text;
+                }
+                private readonly string[] allItems;
+                public FilteredList(string[] items)
+                {
+                    allItems = items;
+                    Entries = new List<Entry>();
+                    UpdateFilter("");
+                }
+                public string Filter { get; private set; }
+                public List<Entry> Entries { get; private set; }
+                public int Count { get { return allItems.Length; } }
+                public bool UpdateFilter(string filter)
+                {
+                    if (Filter == filter)
+                        return false;
+                    Filter = filter;
+                    Entries.Clear();
+                    for (int i = 0; i < allItems.Length; i++)
+                    {
+                        if (string.IsNullOrEmpty(Filter) || allItems[i].ToLower().Contains(Filter.ToLower()))
+                        {
+                            Entry entry = new Entry
+                            {
+                                Index = i,
+                                Text = allItems[i]
+                            };
+                            if (string.Equals(allItems[i], Filter, StringComparison.CurrentCultureIgnoreCase))
+                                Entries.Insert(0, entry);
+                            else
+                                Entries.Add(entry);
+                        }
+                    }
+                    return true;
+                }
+            }
+
+            private readonly Action<int, string> onSelectionMade;
+            private readonly int currentIndex;
+            private readonly FilteredList list;
+            private Vector2 scroll;
+            private int hoverIndex;
+            private int scrollToIndex;
+            private float scrollOffset;
+            private static GUIStyle Selection = "SelectionRect";
+
+            private SearchablePopup(string[] names, int currentIndex, Action<int, string> onSelectionMade)
+            {
+                list = new FilteredList(names);
+                this.currentIndex = currentIndex;
+                this.onSelectionMade = onSelectionMade;
+                hoverIndex = currentIndex;
+                scrollToIndex = currentIndex;
+                scrollOffset = GetWindowSize().y - rowHeight * 2;
+            }
+
+            public override void OnOpen()
+            {
+                base.OnOpen();
+                EditorEnv.update += Repaint;
+            }
+            public override void OnClose()
+            {
+                base.OnClose();
+                EditorEnv.update -= Repaint;
+            }
+
+            public override Vector2 GetWindowSize()
+            {
+                return new Vector2(base.GetWindowSize().x,
+                    Mathf.Min(600, list.Count * rowHeight + EditorStyles.toolbar.fixedHeight));
+            }
+
+            public override void OnGUI(Rect rect)
+            {
+                Rect searchRect = new Rect(0, 0, rect.width, EditorStyles.toolbar.fixedHeight);
+                Rect scrollRect = Rect.MinMaxRect(0, searchRect.yMax, rect.xMax, rect.yMax);
+
+                HandleKeyboard();
+                DrawSearch(searchRect);
+                DrawSelectionArea(scrollRect);
+            }
+            private InnerSearchField searchField = new InnerSearchField();
+            private void DrawSearch(Rect rect)
+            {
+                GUI.Label(rect, "", EditorStyles.toolbar);
+                if (list.UpdateFilter(searchField.OnGUI(rect.Zoom(AnchorType.MiddleCenter, -2), list.Filter)))
+                {
+                    hoverIndex = 0;
+                    scroll = Vector2.zero;
+                }
+            }
+
+            private void DrawSelectionArea(Rect scrollRect)
+            {
+                Rect contentRect = new Rect(0, 0,
+                    scrollRect.width - GUI.skin.verticalScrollbar.fixedWidth,
+                    list.Entries.Count * rowHeight);
+
+                scroll = GUI.BeginScrollView(scrollRect, scroll, contentRect);
+
+                Rect rowRect = new Rect(0, 0, scrollRect.width, rowHeight);
+
+                for (int i = 0; i < list.Entries.Count; i++)
+                {
+                    if (scrollToIndex == i &&
+                        (Event.current.type == EventType.Repaint
+                         || Event.current.type == EventType.Layout))
+                    {
+                        Rect r = new Rect(rowRect);
+                        r.y += scrollOffset;
+                        GUI.ScrollTo(r);
+                        scrollToIndex = -1;
+                        scroll.x = 0;
+                    }
+
+                    if (rowRect.Contains(Event.current.mousePosition))
+                    {
+                        if (Event.current.type == EventType.MouseMove ||
+                            Event.current.type == EventType.ScrollWheel)
+                            hoverIndex = i;
+                        if (Event.current.type == EventType.MouseDown)
+                        {
+                            onSelectionMade(list.Entries[i].Index, list.Entries[i].Text);
+                            EditorWindow.focusedWindow.Close();
+                        }
+                    }
+
+                    DrawRow(rowRect, i);
+
+                    rowRect.y = rowRect.yMax;
+                }
+
+                GUI.EndScrollView();
+            }
+
+            private void DrawRow(Rect rowRect, int i)
+            {
+                if (list.Entries[i].Index == currentIndex)
+                    DrawBox(rowRect, Color.cyan);
+                else if (i == hoverIndex)
+                    DrawBox(rowRect, Color.white);
+                Rect labelRect = new Rect(rowRect);
+                labelRect.xMin += rowIndent;
+                GUI.Label(labelRect, list.Entries[i].Text);
+            }
+            private void HandleKeyboard()
+            {
+                Event e = Event.current;
+                if (e.type == EventType.KeyDown)
+                {
+                    if (e.keyCode == KeyCode.DownArrow)
+                    {
+                        hoverIndex = Mathf.Min(list.Entries.Count - 1, hoverIndex + 1);
+                        Event.current.Use();
+                        scrollToIndex = hoverIndex;
+                        scrollOffset = rowHeight;
+                    }
+                    if (e.keyCode == KeyCode.UpArrow)
+                    {
+                        hoverIndex = Mathf.Max(0, hoverIndex - 1);
+                        Event.current.Use();
+                        scrollToIndex = hoverIndex;
+                        scrollOffset = -rowHeight;
+                    }
+                    if (e.keyCode == KeyCode.Return || e.character == '\n')
+                    {
+                        if (hoverIndex >= 0 && hoverIndex < list.Entries.Count)
+                        {
+                            onSelectionMade(list.Entries[hoverIndex].Index, list.Entries[hoverIndex].Text);
+                            EditorWindow.focusedWindow.Close();
+                        }
+                    }
+                    if (e.keyCode == KeyCode.Escape)
+                    {
+                        EditorWindow.focusedWindow.Close();
+                    }
+                }
+            }
+        }
+
 
     }
     class GUICanvasHierarchyTree: DesignWindowItem
@@ -356,7 +792,7 @@ namespace IFramework.GUITool.LayoutDesign
                 var rs = rect.HorizontalSplit(LineHeight);
                 Rect selfRect = rs[0];
                 if (GUINodeSelection.node == this._element && e.type == EventType.Repaint)
-                    new GUIStyle("SelectionRect").Draw(selfRect, false, false, false, false);
+                    GUIStyles.Get("SelectionRect").Draw(selfRect, false, false, false, false);
                 selfRect.xMin += 20 * _element.depth;
                 Rect childrenRect = rs[1];
                 childrenRect.xMin += 20 * _element.depth;
